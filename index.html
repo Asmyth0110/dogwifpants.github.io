@@ -7,6 +7,37 @@
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <style>
 
+    .container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding-top: 2rem;
+}
+
+.text-section {
+  flex: 1;
+  min-width: 300px;
+  text-align: left;
+}
+
+.image-section {
+  flex: 1;
+  min-width: 280px;
+  text-align: center;
+}
+
+.main-image {
+  max-width: 100%;
+  height: auto;
+  border: 4px solid #d6d1c4;
+  border-radius: 6px;
+}
+
+
     body {
       background-color: #f7f4e9; /* off-white vintage tone */
       font-family: 'Courier New', Courier, monospace; /* typewriter style */
@@ -63,14 +94,20 @@
 </head>
 <body>
 
-  <h1>Dog Wif Pants</h1>
- 
-  <div class="lore">
-    <p class="section-heading">The Origins: A Real Meme, A Real Movement</p>
-    <p>Dog Wif Pants is not just another internet joke turned token. It is based on a real meme from China, birthed in 2016, that has captivated online communities for years, and now, it has found its way into the crypto world as the first-ever “wif coin” on Solana.</p>
+<div class="container">
+  <div class="text-section">
+    <h1>Dog Wif Pants</h1>
+    <div class="lore">
+      <p class="section-heading">The Origins: A Real Meme, A Real Movement</p>
+      <p>
+        Dog Wif Pants is not just another internet joke turned token. It is based on a real meme from China, birthed in 2016, that has captivated online communities for years, and now, it has found its way into the crypto world as the first-ever “wif coin” on Solana.
+      </p>
+    </div>
   </div>
-
-  <img src="original.jpg" alt="Dog Wif Pants Meme" class="main-image" />
+  <div class="image-section">
+    <img src="original.jpg" alt="Dog Wif Pants Meme" class="main-image" />
+  </div>
+</div>
 
   <div class="links">
     <a href="https://twitter.com/dogwifpants" target="_blank">𝕏 Official</a>
