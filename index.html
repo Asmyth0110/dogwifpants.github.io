@@ -92,6 +92,38 @@
       color: #f7f4e9;
       border-color: #444;
     }
+    .gallery {
+  max-width: 1000px;
+  margin: 4rem auto;
+  padding: 1rem;
+  text-align: center;
+}
+
+.gallery h2 {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.meme-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.meme-grid img {
+  width: 100%;
+  height: auto;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  transition: transform 0.2s;
+}
+
+.meme-grid img:hover {
+  transform: scale(1.03);
+  border-color: #222;
+}
+
   </style>
 </head>
 <body>
@@ -110,6 +142,17 @@
     <img src="original.jpg" alt="Dog Wif Pants Meme" class="main-image" />
   </div>
 </div>
+  <div class="gallery">
+  <h2>The Meme Vault</h2>
+  <div class="meme-grid">
+    <a href="memes/meme1.jpg" target="_blank"><img src="memes/meme1.jpg" alt="Meme 1" /></a>
+    <a href="memes/meme2.jpg" target="_blank"><img src="memes/meme2.jpg" alt="Meme 2" /></a>
+    <a href="memes/meme3.jpg" target="_blank"><img src="memes/meme3.jpg" alt="Meme 3" /></a>
+    <a href="memes/meme4.jpg" target="_blank"><img src="memes/meme4.jpg" alt="Meme 4" /></a>
+    <!-- Add more memes as needed -->
+  </div>
+</div>
+
 
   <div class="links">
     <a href="https://twitter.com/dogwifpants" target="_blank">𝕏 Official</a>
