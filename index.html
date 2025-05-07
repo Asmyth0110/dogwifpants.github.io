@@ -6,6 +6,28 @@
   <title>Dog Wif Pants</title>
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <style>
+    
+    .typing {
+  overflow: hidden;
+  border-right: 0.15em solid #222;
+  white-space: nowrap;
+  margin: 0 auto;
+  letter-spacing: 1px;
+  animation:
+    typing 3s steps(20, end),
+    blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 15ch }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: #222 }
+}
+
     body {
       background-color: #f7f4e9; /* off-white vintage tone */
       font-family: 'Courier New', Courier, monospace; /* typewriter style */
@@ -19,6 +41,7 @@
       height: auto;
       border: 4px solid #d6d1c4;
       border-radius: 6px;
+      margin-top: 2rem;
       margin-bottom: 2rem;
     }
     h1 {
@@ -29,9 +52,17 @@
     }
     .lore {
       max-width: 700px;
-      margin: 0 auto 3rem auto;
+      margin: 0 auto;
       text-align: left;
       font-size: 1.1rem;
+    }
+    .section-heading {
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+    .links {
+      margin-top: 2rem;
     }
     .links a {
       display: inline-block;
@@ -49,19 +80,17 @@
       color: #f7f4e9;
       border-color: #444;
     }
-    p {
-      font-weight: bold
-    }
   </style>
 </head>
 <body>
- 
+
   <h1>Dog Wif Pants</h1>
 
   <div class="lore">
-    <p><strong>The Origins: A Real Meme, A Real Movement</strong></p>
+    <p class="section-heading">The Origins: A Real Meme, A Real Movement</p>
     <p>Dog Wif Pants is not just another internet joke turned token. It is based on a real meme from China, birthed in 2016, that has captivated online communities for years, and now, it has found its way into the crypto world as the first-ever “wif coin” on Solana.</p>
   </div>
+
   <img src="original.jpg" alt="Dog Wif Pants Meme" class="main-image" />
 
   <div class="links">
@@ -72,3 +101,4 @@
   </div>
 </body>
 </html>
+
