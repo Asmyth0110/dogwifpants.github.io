@@ -6,76 +6,77 @@
   <title>Dog Wif Pants</title>
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <style>
-
-    .container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 2rem;
-  max-width: 1000px;
-  margin: 0 auto;
-  padding-top: 2rem;
-}
-
-.text-section {
-  flex: 1;
-  min-width: 300px;
-  text-align: left;
-}
-
-.image-section {
-  flex: 1;
-  min-width: 280px;
-  text-align: center;
-}
-
-.main-image {
-  width: 75%;
-  height: auto;
-  border: 4px solid #d6d1c4;
-  border-radius: 6px;
-  margin: 2rem auto;
-  display: block;
-}
-
-
     body {
-      background-color: #f7f4e9; /* off-white vintage tone */
-      font-family: 'Courier New', Courier, monospace; /* typewriter style */
+      background-color: #f7f4e9;
+      font-family: 'Courier New', Courier, monospace;
       color: #222;
       text-align: center;
       padding: 2rem;
       line-height: 1.6;
     }
+
     img.main-image {
-      max-width: 100%;
+      width: 75%;
       height: auto;
       border: 4px solid #d6d1c4;
       border-radius: 6px;
-      margin-top: 2rem;
-      margin-bottom: 2rem;
+      margin: 2rem auto;
+      display: block;
     }
+
     h1 {
       font-size: 3rem;
       margin: 0;
       padding-bottom: 1rem;
       letter-spacing: 1px;
     }
+
     .lore {
       max-width: 700px;
-      margin: 0 auto;
-      text-align: left;
+      margin: 0 auto 3rem auto;
       font-size: 1.1rem;
     }
+
     .section-heading {
       font-weight: bold;
       font-size: 1.2rem;
       margin-bottom: 0.5rem;
     }
-    .links {
-      margin-top: 2rem;
+
+    .gallery {
+      max-width: 1000px;
+      margin: 4rem auto;
+      padding: 1rem;
     }
+
+    .gallery h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .meme-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .meme-grid img {
+      width: 100%;
+      height: auto;
+      border: 2px solid #ccc;
+      border-radius: 4px;
+      transition: transform 0.2s;
+    }
+
+    .meme-grid img:hover {
+      transform: scale(1.03);
+      border-color: #222;
+    }
+
+    .links {
+      margin-top: 3rem;
+    }
+
     .links a {
       display: inline-block;
       margin: 0.5rem 1rem;
@@ -87,71 +88,37 @@
       background-color: #fffaf0;
       transition: 0.2s ease-in-out;
     }
+
     .links a:hover {
       background-color: #222;
       color: #f7f4e9;
       border-color: #444;
     }
-    .gallery {
-  max-width: 1000px;
-  margin: 4rem auto;
-  padding: 1rem;
-  text-align: center;
-}
-
-.gallery h2 {
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 2rem;
-  margin-bottom: 1rem;
-}
-
-.meme-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-}
-
-.meme-grid img {
-  width: 100%;
-  height: auto;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  transition: transform 0.2s;
-}
-
-.meme-grid img:hover {
-  transform: scale(1.03);
-  border-color: #222;
-}
-
   </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="image-section">
-    <img src="original.jpg" alt="Dog Wif Pants Meme" class="main-image" />
+  <img src="original.jpg" alt="Dog Wif Pants Meme" class="main-image" />
+
+  <h1>Dog Wif Pants</h1>
+
+  <div class="lore">
+    <p class="section-heading">The Origins: A Real Meme, A Real Movement</p>
+    <p>
+      Dog Wif Pants is not just another internet joke turned token. It is based on a real meme from China, birthed in 2016, that has captivated online communities for years, and now, it has found its way into the crypto world as the first-ever “wif coin” on Solana.
+    </p>
   </div>
-  <div class="text-section">
-    <h1>Dog Wif Pants</h1>
-    <div class="lore">
-      <p class="section-heading">The Origins: A Real Meme, A Real Movement</p>
-      <p>
-        Dog Wif Pants is not just another internet joke turned token. It is based on a real meme from China, birthed in 2016, that has captivated online communities for years, and now, it has found its way into the crypto world as the first-ever “wif coin” on Solana.
-      </p>
-    </div>
-  </div>
-</div>
+
   <div class="gallery">
-  <h2>The Meme Vault</h2>
-  <div class="meme-grid">
+   <h2>The Meme Vault</h2>
+    <div class="meme-grid">
     <a href="memes.1/meme1.png" target="_blank"><img src="memes.1/meme1.png" alt="Meme 1" /></a>
     <a href="memes.1/meme2.png" target="_blank"><img src="memes.1/meme2.png" alt="Meme 2" /></a>
     <a href="memes.1/meme3.png" target="_blank"><img src="memes.1/meme3.png" alt="Meme 3" /></a>
     <a href="memes.1/meme4.png" target="_blank"><img src="memes.1/meme4.png" alt="Meme 4" /></a>
-    <!-- Add more memes as needed -->
+    <!-- Add more as needed -->
+    </div>
   </div>
-</div>
 
 
   <div class="links">
@@ -163,4 +130,5 @@
 
 </body>
 </html>
+
 
