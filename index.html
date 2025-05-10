@@ -173,7 +173,7 @@
   font-size: 1.1rem;
 }
 
-.swap-button {
+/*.swap-button {
   display: inline-block;
   padding: 0.8rem 1.5rem;
   background-color: #222;
@@ -183,12 +183,30 @@
   border: 2px solid #444;
   border-radius: 6px;
   transition: 0.2s ease-in-out;
+}*/
+    .links a:last-child {
+  font-weight: bold;
+  color: #000;
 }
 
 .swap-button:hover {
   background-color: #f7f4e9;
   color: #222;
   border-color: #222;
+  .swap-button::after {
+  content: "";
+  display: block;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  color: #777;
+  transition: opacity 0.2s ease-in-out;
+  opacity: 0;
+}
+
+.swap-button:hover::after {
+  content: "🧠 Initiating Drip Transfer...";
+  opacity: 1;
+}
 }
 
   </style>
@@ -236,13 +254,15 @@ It’s pants.
     <a href="https://dexscreener.com/solana/dfoj2pvwmhxpr9bdavufu1xlzudeb2vr8pvu4uqnnfwm" target="_blank">📈 View Chart</a>
     <a href="https://raydium.io/swap/?inputCurrency=sol&outputCurrency=BG6VWes7KRFNPXHbWbA95ZU7grnaob8JSsS7r181pump" target="_blank">🛒 Buy $PANTS</a>
     <a href="https://solscan.io/token/BG6VWes7KRFNPXHbWbA95ZU7grnaob8JSsS7r181pump" target="_blank">🔍 View on Solscan</a>
+    <a href="portal.html">🌀 Pants Swap Portal</a>
   </div>
   </div>
 
   <div class="jupiter-swap">
   <h2>$PANTS Swap</h2>
   <p>Walk into the meme. Swap into the pants.</p>
-  <a class="swap-button" href="https://jup.ag/swap/BG6VWes7KRFNPXHbWbA95ZU7grnaob8JSsS7r181pump" target="_blank">🔁 Swap Now on Jupiter</a>
+  <a class="swap-button" href="https://jup.ag/swap/WIF/YOUR_PANTS_TOKEN" target="_blank">
+  🔁 Enter the Drip Portal</a>
   </div>
 
 
