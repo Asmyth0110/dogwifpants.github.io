@@ -61,6 +61,16 @@
       text-decoration: none;
     }
 
+    .swap-button::after {
+      content: "";
+      display: block;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      color: #777;
+      transition: opacity 0.2s ease-in-out;
+      opacity: 0;
+}
+    
     .swap-button:hover::after {
     content: "🧠 Initiating Drip Transfer...";
     opacity: 1;
