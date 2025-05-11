@@ -117,14 +117,6 @@
     You don't just trade—<strong>you tailor your portfolio</strong>.
   </p>
 
-  <a
-  href="#"
-  onclick="window.Jupiter?.connectWallet()"
-  style="display:inline-block; padding:0.7rem 1.2rem; background:#222; color:#fff; border-radius:5px; text-decoration:none; font-family:monospace; margin-bottom:1rem;"
->
-🔓 Connect Wallet
-</a>
-
   <div class="swap-section">
     <p><strong>🧵 Suit up below:</strong></p>
     <div id="jupiter-terminal"></div>
@@ -139,16 +131,17 @@
   }, 2000);
 
   window.addEventListener('DOMContentLoaded', () => {
-    window.Jupiter.init({
-      displayMode: "integrated",
-      integratedTargetId: "jupiter-terminal",
-      endpoint: "https://api.mainnet-beta.solana.com",
-      formProps: {
-        defaultInputMint: "E5rmXg8vj5M8MEe6i3E3kPKLvZTSUbY1CjJtFzjifqhu",
-        defaultOutputMint: "BG6VWes7KRFNPXHbWbA95ZU7grnaob8JSsS7r181pump",
-        initialAmount: "1"
-      }
-    });
+  window.Jupiter.init({
+  displayMode: "integrated",
+  integratedTargetId: "jupiter-terminal",
+  endpoint: "https://api.mainnet-beta.solana.com",
+  formProps: {
+    defaultInputMint: "E5rmXg8vj5M8MEe6i3E3kPKLvZTSUbY1CjJtFzjifqhu",   // WIF
+    defaultOutputMint: "BG6VWes7KRFNPXHbWbA95ZU7grnaob8JSsS7r181pump",  // PANTS
+    initialAmount: "1"
+  }
+});
+
   });
 </script>
 
