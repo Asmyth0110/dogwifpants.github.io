@@ -124,24 +124,25 @@
   <a class="back-link" href="index.html">← Return to Homepage</a>
 
   <script>
-    // Calibrating overlay
-    setTimeout(() => {
-      const overlay = document.getElementById('calibration');
-      if (overlay) overlay.style.display = 'none';
-    }, 2000);
+  setTimeout(() => {
+    const overlay = document.getElementById('calibration');
+    if (overlay) overlay.style.display = 'none';
+  }, 2000);
 
-    // Initialize Jupiter Terminal
-    window.addEventListener('DOMContentLoaded', () => {
-      window.Jupiter.init({
-        displayMode: "integrated",
-        integratedTargetId: "jupiter-terminal",
-        endpoint: "https://api.mainnet-beta.solana.com",
-        formProps: {
-          fixedOutputMint: false
-        }
-      });
+  window.addEventListener('DOMContentLoaded', () => {
+    window.Jupiter.init({
+      displayMode: "integrated",
+      integratedTargetId: "jupiter-terminal",
+      endpoint: "https://api.mainnet-beta.solana.com",
+      formProps: {
+        fixedInputMint: "WIF_MINT_HERE",
+        fixedOutputMint: "PANTS_MINT_HERE",
+        initialAmount: "1"
+      }
     });
-  </script>
+  });
+</script>
+
 
 </body>
 </html>
