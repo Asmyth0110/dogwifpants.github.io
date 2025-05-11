@@ -124,7 +124,7 @@
 
   <a class="back-link" href="index.html">← Return to Homepage</a>
 
- <script>
+<script>
   setTimeout(() => {
     const overlay = document.getElementById('calibration');
     if (overlay) overlay.style.display = 'none';
@@ -136,13 +136,14 @@
       integratedTargetId: "jupiter-terminal",
       endpoint: "https://api.mainnet-beta.solana.com",
       formProps: {
-        fixedInputMint: "E5rmXg8vj5M8MEe6i3E3kPKLvZTSUbY1CjJtFzjifqhu",   // WIF
-        fixedOutputMint: "BG6VWes7KRFNPXHbWbA95ZU7grnaob8JSsS7r181pump",  // PANTS
+        defaultInputMint: "E5rmXg8vj5M8MEe6i3E3kPKLvZTSUbY1CjJtFzjifqhu",
+        defaultOutputMint: "BG6VWes7KRFNPXHbWbA95ZU7grnaob8JSsS7r181pump",
         initialAmount: "1"
       }
     });
   });
 </script>
+
 
 
 
