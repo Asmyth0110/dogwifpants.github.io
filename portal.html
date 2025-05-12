@@ -31,6 +31,16 @@
       font-size: 2.5rem;
       margin-top: 1rem;
       margin-bottom: 0.5rem;
+      animation: glow-text 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow-text {
+      from {
+        text-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+      }
+      to {
+        text-shadow: 0 0 25px rgba(0, 255, 255, 1);
+      }
     }
 
     p {
@@ -43,7 +53,7 @@
 
     .swap-section {
       position: relative;
-      background: rgba(255, 250, 240, 0.96);
+      background: rgba(0, 0, 0, 0.85); /* dark background for contrast */
       padding: 2rem;
       margin: 2rem auto;
       border-radius: 16px;
@@ -62,7 +72,7 @@
     .back-link {
       margin-top: 2rem;
       display: block;
-      color: #111;
+      color: #ddd;
       text-decoration: none;
       font-weight: bold;
     }
@@ -85,7 +95,7 @@
 
     .label-text {
       font-size: 1rem;
-      color: #111;
+      color: #f7f4e9;
       margin-bottom: 1rem;
       font-weight: bold;
     }
@@ -134,7 +144,8 @@
           initialOutputMint: "BG6VWes7KRFNPXHbWbA95ZU7grnaob8JSsS7r181pump",  // PANTS
           initialAmount: "1",
           strictTokenList: false
-        }
+        },
+        theme: "dark"
       });
     });
   </script>
