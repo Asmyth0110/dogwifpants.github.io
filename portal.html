@@ -43,28 +43,28 @@
 
     .swap-section {
       position: relative;
-      background: rgba(255, 250, 240, 0.92);
+      background: rgba(255, 250, 240, 0.96);
       padding: 2rem;
       margin: 2rem auto;
-      border-radius: 12px;
-      max-width: 700px;
+      border-radius: 16px;
+      max-width: 720px;
       width: 100%;
-      box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
-      animation: glow 2s ease-in-out infinite alternate;
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.25);
     }
 
     #jupiter-terminal {
       width: 100%;
-      min-height: 600px;
+      min-height: 620px;
+      border-radius: 12px;
+      overflow: hidden;
     }
 
-    @keyframes glow {
-      from {
-        box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
-      }
-      to {
-        box-shadow: 0 0 30px rgba(0, 255, 255, 0.8);
-      }
+    .back-link {
+      margin-top: 2rem;
+      display: block;
+      color: #111;
+      text-decoration: none;
+      font-weight: bold;
     }
 
     .overlay {
@@ -83,16 +83,12 @@
       z-index: 999;
     }
 
-    .back-link {
-      margin-top: 3rem;
-      display: block;
-      color: #555;
-      text-decoration: none;
+    .label-text {
+      font-size: 1rem;
+      color: #111;
+      margin-bottom: 1rem;
+      font-weight: bold;
     }
-
-    .black-text {
-      colour: black;
-    }  
   </style>
 </head>
 <body>
@@ -116,34 +112,32 @@
   </p>
 
   <div class="swap-section">
-    <p class="black-text"><strong>🧵 Suit up below:</strong></p>
+    <div class="label-text">🧵 Suit up below:</div>
     <div id="jupiter-terminal"></div>
   </div>
 
   <a class="back-link" href="index.html">← Return to Homepage</a>
 
-<script>
-  setTimeout(() => {
-    const overlay = document.getElementById('calibration');
-    if (overlay) overlay.style.display = 'none';
-  }, 2000);
+  <script>
+    setTimeout(() => {
+      const overlay = document.getElementById('calibration');
+      if (overlay) overlay.style.display = 'none';
+    }, 2000);
 
-  window.addEventListener('DOMContentLoaded', () => {
-    window.Jupiter.init({
-      displayMode: "integrated",
-      integratedTargetId: "jupiter-terminal",
-      endpoint: "https://rpc.hellomoon.io",
-      formProps: {
-        initialInputMint: "EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm",   // WIF
-        initialOutputMint: "BG6VWes7KRFNPXHbWbA95ZU7grnaob8JSsS7r181pump",  // PANTS
-        initialAmount: "1",
-        strictTokenList: false
-      }
+    window.addEventListener('DOMContentLoaded', () => {
+      window.Jupiter.init({
+        displayMode: "integrated",
+        integratedTargetId: "jupiter-terminal",
+        endpoint: "https://rpc.hellomoon.io",
+        formProps: {
+          initialInputMint: "EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm",  // WIF
+          initialOutputMint: "BG6VWes7KRFNPXHbWbA95ZU7grnaob8JSsS7r181pump",  // PANTS
+          initialAmount: "1",
+          strictTokenList: false
+        }
+      });
     });
-  });
-</script>
-
-
+  </script>
 
 </body>
 </html>
