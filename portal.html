@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pants Swap: The Drip Portal</title>
 
-  <!-- Jupiter Terminal Script -->
   <script src="https://terminal.jup.ag/main-v4.js" data-preload></script>
 
   <style>
@@ -14,7 +13,7 @@
       font-family: 'Courier New', Courier, monospace;
       color: white;
       text-align: center;
-      padding: 2rem;
+      padding: 1.5rem;
       background-image: url("memes.1/background1.png");
       background-size: cover;
       background-position: center;
@@ -25,36 +24,32 @@
       align-items: center;
       justify-content: flex-start;
       min-height: 100vh;
+      box-sizing: border-box;
     }
 
     h1 {
-      font-size: 2.5rem;
+      font-size: 2.3rem;
       margin-top: 1rem;
       margin-bottom: 0.5rem;
       animation: glow-text 2s ease-in-out infinite alternate;
     }
 
     @keyframes glow-text {
-      from {
-        text-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
-      }
-      to {
-        text-shadow: 0 0 25px rgba(0, 255, 255, 1);
-      }
+      from { text-shadow: 0 0 10px rgba(0, 255, 255, 0.4); }
+      to { text-shadow: 0 0 25px rgba(0, 255, 255, 1); }
     }
 
     p {
-      font-size: 1.1rem;
-      margin-bottom: 2rem;
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
       max-width: 700px;
       margin-left: auto;
       margin-right: auto;
     }
 
     .swap-section {
-      position: relative;
-      background: rgba(0, 0, 0, 0.85);
-      padding: 2rem;
+      background: rgba(0, 0, 0, 0.88);
+      padding: 1.5rem;
       margin: 2rem auto;
       border-radius: 16px;
       max-width: 720px;
@@ -69,14 +64,6 @@
       overflow: hidden;
     }
 
-    .back-link {
-      margin-top: 2rem;
-      display: block;
-      color: #ddd;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
     .label-text {
       font-size: 1rem;
       color: #f7f4e9;
@@ -86,11 +73,18 @@
 
     .price-feed {
       margin-top: 1rem;
-      font-size: 1rem;
+      font-size: 0.95rem;
       color: #f7f4e9;
     }
 
-    /* Top loading bar */
+    .back-link {
+      margin-top: 2rem;
+      display: block;
+      color: #ddd;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
     .loading-bar {
       position: fixed;
       top: 0;
@@ -124,18 +118,18 @@
       z-index: 999;
     }
 
-    /* Jupiter doesn't expose button styling, so this is a placeholder */
+    @keyframes glow-swap {
+      from { box-shadow: 0 0 8px rgba(0, 255, 255, 0.4); }
+      to { box-shadow: 0 0 16px rgba(0, 255, 255, 1); }
+    }
+
     ::part(swap-button) {
       animation: glow-swap 1.5s infinite alternate;
     }
 
-    @keyframes glow-swap {
-      from {
-        box-shadow: 0 0 8px rgba(0, 255, 255, 0.4);
-      }
-      to {
-        box-shadow: 0 0 16px rgba(0, 255, 255, 1);
-      }
+    @media (max-width: 768px) {
+      h1 { font-size: 2rem; }
+      .swap-section { padding: 1rem; }
     }
   </style>
 </head>
@@ -169,23 +163,19 @@
   <a class="back-link" href="index.html">← Return to Homepage</a>
 
   <script>
-    // Hide overlay and loading bar
     setTimeout(() => {
-      const overlay = document.getElementById('calibration');
-      const bar = document.getElementById('loadbar');
-      if (overlay) overlay.style.display = 'none';
-      if (bar) bar.style.display = 'none';
+      document.getElementById('calibration').style.display = 'none';
+      document.getElementById('loadbar').style.display = 'none';
     }, 2000);
 
-    // Initialize Jupiter Terminal
     window.addEventListener('DOMContentLoaded', () => {
       window.Jupiter.init({
         displayMode: "integrated",
         integratedTargetId: "jupiter-terminal",
         endpoint: "https://rpc.hellomoon.io",
         formProps: {
-          initialInputMint: "EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm",  // WIF
-          initialOutputMint: "BG6VWes7KRFNPXHbWbA95ZU7grnaob8JSsS7r181pump",  // PANTS
+          initialInputMint: "EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm",  // ✅ WIF
+          initialOutputMint: "BG6VWes7KRFNPXHbWbA95ZU7grnaob8JSsS7r181pump",  // ✅ PANTS
           initialAmount: "1",
           strictTokenList: false
         },
@@ -193,27 +183,21 @@
       });
     });
 
-    // Simulated price feed – replace with real fetch later
- async function updatePrice() {
-  try {
-    const url = 'https://quote-api.jup.ag/v6/quote?inputMint=EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm&outputMint=BG6VWes7KRFNPXHbWbA95ZU7grnaob8JSsS7r181pump&amount=1000000';
-    const res = await fetch(url);
-    const data = await res.json();
+    async function updatePrice() {
+      try {
+        const url = 'https://quote-api.jup.ag/v6/quote?inputMint=EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm&outputMint=BG6VWes7KRFNPXHbWbA95ZU7grnaob8JSsS7r181pump&amount=1000000';
+        const res = await fetch(url);
+        const data = await res.json();
+        const price = data.outAmount / 1_000_000;
+        const formatted = Number(price).toFixed(6);
+        document.getElementById('priceFeed').textContent = `💰 1 WIF ≈ ${formatted} $PANTS`;
+      } catch (e) {
+        document.getElementById('priceFeed').textContent = '⚠️ Failed to load price';
+      }
+    }
 
-    const price = data.outAmount / 1_000_000;
-    const formatted = Number(price).toFixed(6);
-
-    document.getElementById('priceFeed').textContent = `💰 1 WIF ≈ ${formatted} $PANTS`;
-  } catch (e) {
-    document.getElementById('priceFeed').textContent = '⚠️ Failed to load price';
-  }
-}
-
-// initial load
-updatePrice();
-// update every 15 seconds
-setInterval(updatePrice, 15000);
-
+    updatePrice();
+    setInterval(updatePrice, 15000);
   </script>
 
 </body>
