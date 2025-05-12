@@ -53,7 +53,7 @@
 
     .swap-section {
       position: relative;
-      background: rgba(0, 0, 0, 0.85); /* dark background for contrast */
+      background: rgba(0, 0, 0, 0.85);
       padding: 2rem;
       margin: 2rem auto;
       border-radius: 16px;
@@ -77,6 +77,37 @@
       font-weight: bold;
     }
 
+    .label-text {
+      font-size: 1rem;
+      color: #f7f4e9;
+      margin-bottom: 1rem;
+      font-weight: bold;
+    }
+
+    .price-feed {
+      margin-top: 1rem;
+      font-size: 1rem;
+      color: #f7f4e9;
+    }
+
+    /* Top loading bar */
+    .loading-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 5px;
+      width: 100%;
+      background: linear-gradient(90deg, #00ffff, #66ffcc, #00ffff);
+      background-size: 300% 100%;
+      animation: loading-bar-move 2s linear infinite;
+      z-index: 1000;
+    }
+
+    @keyframes loading-bar-move {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+
     .overlay {
       position: fixed;
       top: 0;
@@ -93,16 +124,24 @@
       z-index: 999;
     }
 
-    .label-text {
-      font-size: 1rem;
-      color: #f7f4e9;
-      margin-bottom: 1rem;
-      font-weight: bold;
+    /* Jupiter doesn't expose button styling, so this is a placeholder */
+    ::part(swap-button) {
+      animation: glow-swap 1.5s infinite alternate;
+    }
+
+    @keyframes glow-swap {
+      from {
+        box-shadow: 0 0 8px rgba(0, 255, 255, 0.4);
+      }
+      to {
+        box-shadow: 0 0 16px rgba(0, 255, 255, 1);
+      }
     }
   </style>
 </head>
 <body>
 
+  <div class="loading-bar" id="loadbar"></div>
   <div class="overlay" id="calibration">🪡 Pants calibrating...</div>
 
   <h1>🌀 Pants Swap</h1>
@@ -124,16 +163,21 @@
   <div class="swap-section">
     <div class="label-text">🧵 Suit up below:</div>
     <div id="jupiter-terminal"></div>
+    <div class="price-feed" id="priceFeed">💰 Loading $PANTS price...</div>
   </div>
 
   <a class="back-link" href="index.html">← Return to Homepage</a>
 
   <script>
+    // Hide overlay and loading bar
     setTimeout(() => {
       const overlay = document.getElementById('calibration');
+      const bar = document.getElementById('loadbar');
       if (overlay) overlay.style.display = 'none';
+      if (bar) bar.style.display = 'none';
     }, 2000);
 
+    // Initialize Jupiter Terminal
     window.addEventListener('DOMContentLoaded', () => {
       window.Jupiter.init({
         displayMode: "integrated",
@@ -148,6 +192,28 @@
         theme: "dark"
       });
     });
+
+    // Simulated price feed – replace with real fetch later
+ async function updatePrice() {
+  try {
+    const url = 'https://quote-api.jup.ag/v6/quote?inputMint=EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm&outputMint=BG6VWes7KRFNPXHbWbA95ZU7grnaob8JSsS7r181pump&amount=1000000';
+    const res = await fetch(url);
+    const data = await res.json();
+
+    const price = data.outAmount / 1_000_000;
+    const formatted = Number(price).toFixed(6);
+
+    document.getElementById('priceFeed').textContent = `💰 1 WIF ≈ ${formatted} $PANTS`;
+  } catch (e) {
+    document.getElementById('priceFeed').textContent = '⚠️ Failed to load price';
+  }
+}
+
+// initial load
+updatePrice();
+// update every 15 seconds
+setInterval(updatePrice, 15000);
+
   </script>
 
 </body>
