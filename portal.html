@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pants Swap: The Drip Portal</title>
 
-  <!-- Jupiter Modal Script -->
+  <!-- Jupiter Terminal Script -->
   <script src="https://terminal.jup.ag/main-v6.js" data-preload></script>
 
   <style>
@@ -47,9 +47,15 @@
       padding: 2rem;
       margin: 2rem auto;
       border-radius: 12px;
-      max-width: 600px;
+      max-width: 700px;
+      width: 100%;
       box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
       animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    #jupiter-terminal {
+      width: 100%;
+      min-height: 600px;
     }
 
     @keyframes glow {
@@ -83,30 +89,6 @@
       color: #555;
       text-decoration: none;
     }
-
-    .jup-launch {
-      padding: 0.9rem 1.4rem;
-      font-size: 1rem;
-      font-weight: bold;
-      color: #f7f4e9;
-      background-color: #222;
-      border: 2px solid #444;
-      border-radius: 6px;
-      text-decoration: none;
-      transition: 0.2s ease-in-out;
-    }
-
-    .jup-launch:hover {
-      background-color: #f7f4e9;
-      color: #222;
-      border-color: #222;
-    }
-
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 2rem;
-      }
-    }
   </style>
 </head>
 <body>
@@ -131,22 +113,23 @@
 
   <div class="swap-section">
     <p><strong>🧵 Suit up below:</strong></p>
-    <a href="#" class="jup-launch" onclick="window.Jupiter.open()">🔁 Enter the Drip Portal</a>
+    <div id="jupiter-terminal"></div>
   </div>
 
   <a class="back-link" href="index.html">← Return to Homepage</a>
 
   <script>
-    // Hide calibration overlay after load
+    // Hide loading overlay after a moment
     setTimeout(() => {
       const overlay = document.getElementById('calibration');
       if (overlay) overlay.style.display = 'none';
     }, 2000);
 
-    // Initialize Jupiter modal with default tokens
+    // Initialize Jupiter terminal
     window.addEventListener('DOMContentLoaded', () => {
       window.Jupiter.init({
-        displayMode: "modal",
+        displayMode: "integrated",
+        integratedTargetId: "jupiter-terminal",
         endpoint: "https://rpc.hellomoon.io",
         formProps: {
           defaultInputMint: "E5rmXg8vj5M8MEe6i3E3kPKLvZTSUbY1CjJtFzjifqhu",  // WIF
