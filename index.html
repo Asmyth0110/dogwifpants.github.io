@@ -290,7 +290,7 @@
   font-family: 'Courier New', Courier, monospace;
 }
 
-.dropdown-nav-wrapper .nav-button {
+.nav-button {
   background-color: #fffaf0;
   border: 1px solid #ccc;
   color: #2a2a2a;
@@ -299,17 +299,12 @@
   cursor: pointer;
   font-weight: bold;
   transition: 0.2s ease-in-out;
-  width: 100%;
 }
 
-.dropdown-nav-wrapper .nav-button:hover {
+.nav-button:hover {
   background-color: #222;
   color: #f7f4e9;
   border-color: #444;
-}
-
-.dropdown-nav-wrapper:hover .dropdown-content {
-  display: block;
 }
 
 .dropdown-content {
@@ -346,8 +341,8 @@
   <h1>Dog Wif Pants</h1>
   
 <div class="dropdown-nav-wrapper">
-  <button class="nav-button">Take me to ▾</button>
-  <div class="dropdown-content">
+  <button class="nav-button" onclick="toggleDropdown()">Take me to ▾</button>
+  <div class="dropdown-content" id="dropdownMenu">
     <a href="index.html">🏠 Home</a>
     <a href="swap/">🌀 Pants Swap</a>
     <a href="drip/index.html">✨ Hall of Drip</a>
@@ -356,6 +351,7 @@
     <a href="dao.html">🧢 Pants DAO</a>
   </div>
 </div>
+
 
 
 
@@ -450,7 +446,21 @@ It’s pants.
     const value = select.value;
     if (value) window.location.href = value;
   }
-  </script>
+  
+  function toggleDropdown() {
+    const menu = document.getElementById("dropdownMenu");
+    menu.style.display = (menu.style.display === "block") ? "none" : "block";
+  }
+
+  document.addEventListener("click", function(e) {
+    const menu = document.getElementById("dropdownMenu");
+    const button = document.querySelector(".nav-button");
+    if (!button.contains(e.target) && !menu.contains(e.target)) {
+      menu.style.display = "none";
+    }
+  });
+</script>
+
 
 </body>
 </html>
