@@ -259,15 +259,22 @@
     border-color: #222;
   }
 
-  .teachings-button {
+.teachings-button {
   font-weight: bold;
   text-shadow: 0 0 6px #7e57c2, 0 0 10px #9575cd;
+  animation: teachingsGlow 2.5s ease-in-out infinite alternate;
   transition: text-shadow 0.3s ease;
-  }
-
-.teachings-button:hover {
-  text-shadow: 0 0 12px #7e57c2, 0 0 18px #9575cd;
 }
+
+@keyframes teachingsGlow {
+  0% {
+    text-shadow: 0 0 6px #7e57c2, 0 0 10px #9575cd;
+  }
+  100% {
+    text-shadow: 0 0 12px #7e57c2, 0 0 24px #b39ddb;
+  }
+}
+
 
 
   </style>
