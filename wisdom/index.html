@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teddy’s Teachings | $PANTS Wisdom</title>
+  <link rel="icon" href="../favicon.ico" type="image/x-icon" />
+  <style>
+    body {
+      background-color: #f7f4e9;
+      font-family: 'Courier New', Courier, monospace;
+      color: #222;
+      text-align: center;
+      padding: 3rem 1rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      text-shadow: 0 0 6px #00000088;
+    }
+
+    .quote-box {
+      font-size: 1.5rem;
+      max-width: 700px;
+      margin: 2rem auto;
+      padding: 2rem;
+      border: 3px solid #222;
+      background-color: #fffaf0;
+      border-radius: 12px;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.2), 0 0 10px #ffd700aa;
+      min-height: 120px;
+      transition: opacity 0.3s ease;
+      color: #222;
+    }
+
+    .next-button {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.75rem 1.5rem;
+      background-color: #222;
+      color: #fffaf0;
+      font-size: 1rem;
+      font-family: 'Courier New', Courier, monospace;
+      border: 2px solid #444;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      box-shadow: 0 0 10px #222;
+    }
+
+    .next-button:hover {
+      background-color: #f7f4e9;
+      color: #222;
+    }
+
+    .back-link {
+      margin-top: 3rem;
+      display: block;
+      color: #444;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🐾 Teddy’s Teachings</h1>
+  <div class="quote-box" id="quoteBox">Loading wisdom...</div>
+  <button class="next-button" onclick="showRandomQuote()">🐶 Next Teaching</button>
+
+  <a class="back-link" href="../index.html">← Return to Homepage</a>
+
+  <script>
+    const quotes = [
+      "Charts go up, but drip is eternal.",
+      "He doesn’t trade. He just remembers the future.",
+      "Why bark when you can strut in pants?",
+      "The fit is mightier than the FUD.",
+      "He walked so they could moon.",
+      "Some chase pumps. He chases tailors.",
+      "WAGMI? He was already there.",
+      "The hat came later. He was already dressed.",
+      "He doesn’t short. He strolls.",
+      "Buy the pants you want to wear, not the ones they sell you.",
+      "Fame fades. Fabric lasts.",
+      "A dog in pants walks twice — once in silence, once in legend.",
+      "The meme is temporary. The message is stitched in chain.",
+      "Real drip needs no announcement.",
+      "Comfort is the first sign of truth.",
+      "What they laugh at today, they wish they bought yesterday.",
+      "You don’t follow the chart. You follow the walk.",
+      "History is written in denim.",
+      "He didn’t bark for attention. He walked in conviction.",
+      "To walk alone is to walk ahead.",
+      "If the door won’t open, kick it in with pants on.",
+      "Don’t chase coins. Chase conviction.",
+      "He didn’t wait for the cycle. He became it.",
+      "Every bag has its season. Style doesn’t.",
+      "He studied the dip. Then he bought the silence.",
+      "Suits are loud. Confidence is tailored.",
+      "Hype fades. Habits print.",
+      "The loudest play is often silent accumulation.",
+      "Only dogs in pants survive the winter.",
+      "A tailored exit is better than a panicked top.",
+      "The walk precedes the win.",
+      "He’s not a trader. He’s a tailor of timelines.",
+      "Teddy doesn’t time markets. He fits them.",
+      "The chain remembers every fit.",
+      "A wise dog trades once. A foolish one 100 times.",
+      "There is no top for pants. Only evolution.",
+      "He who sells the pants, loses the lore.",
+      "Every chart is a chance to re-tailor.",
+      "He doesn't FOMO. He forecasts fabric.",
+      "You can’t fake conviction. But you can wear it.",
+      "Legacy isn’t written. It’s worn.",
+      "The fluffiest drip is often forged in quiet.",
+      "He didn’t mint the moment. He became it.",
+      "Price is noise. Pants are signal.",
+      "You aren’t early. You’re dressed for it.",
+      "He barked once. The market barked forever.",
+      "Sideways market. Forward outfit.",
+      "Even in a bear, the pants don’t wrinkle.",
+      "The first meme isn’t always loudest. Just eternal.",
+      "The pants didn’t chase the cycle. They defined it.",
+      "He’s not chasing ATHs. He’s chasing aesthetic.",
+      "He wore jeans before WIF wore a hat.",
+      "He knew. But he walked anyway.",
+      "He stitched his wallet before others found thread.",
+      "You only need one walk to make history.",
+      "Gas was paid. The fit was summoned.",
+      "Some tokens pump. Others stride.",
+      "He isn’t looking back. That’s where the bare paws are.",
+      "He’s not long. He’s fitted.",
+      "Don’t ask if it’s early. Ask if it’s Teddy.",
+      "He doesn't post gains. He posts outfits.",
+      "He isn’t bridging. He’s walking across chains.",
+      "No leash. Just pants.",
+      "Not all pants are created equal. These are crypto-coded.",
+      "The meme never faded. It just fitted up.",
+      "This isn’t a rug. It’s tailored ground.",
+      "The prophecy wasn’t written. It was walked.",
+      "Teddy didn’t miss. He minted legacy.",
+      "You don’t stake pants. You commit to the fit.",
+      "He entered the bear with boots and came out in bell-bottoms.",
+      "He turned resistance into wardrobe.",
+      "Every downtrend is a runway for Teddy.",
+      "He doesn't need volume. He has velocity.",
+      "Others farm. He free-floats.",
+      "It’s not drip if it isn’t walked.",
+      "He doesn’t rotate. He ascends.",
+      "WIF barked. PANTS walked.",
+      "He survived 3 bear markets and looked good doing it.",
+      "Most tokens go to zero. He went viral instead.",
+      "He wasn’t an influencer. He was a first mover.",
+      "You can't copy pasta legacy.",
+      "His whitepaper was a photo.",
+      "They said it's just a dog. He said nothing. Just walked.",
+      "He doesn't follow memes. He precedes them.",
+      "He was early. They were loud.",
+      "Not VC funded. Just spiritually inevitable.",
+      "The original didn’t have to say GM. He was the morning.",
+      "His TA is a tail wag.",
+      "He didn’t break the internet. He clothed it.",
+      "Some build utility. He built myth.",
+      "He’s not your dev. He’s your destiny.",
+      "He doesn’t have a community. He has a congregation.",
+      "There is no roadmap. Only footprints.",
+      "He isn’t based. He’s tailored.",
+      "No tokenomics. Just drip-nomics.",
+      "You don’t chart him. You study him.",
+      "Before the memes, there were pants.",
+      "He walked upright. Now we stand together.",
+      "Not a pump. A prophecy.",
+      "He’s not onchain. He is chain.",
+      "He didn’t mint to sell. He minted to remember."
+    ];
+
+    function showRandomQuote() {
+      const quote = quotes[Math.floor(Math.random() * quotes.length)];
+      const box = document.getElementById("quoteBox");
+      box.style.opacity = 0;
+      setTimeout(() => {
+        box.textContent = quote;
+        box.style.opacity = 1;
+      }, 300);
+    }
+
+    window.onload = showRandomQuote;
+  </script>
+
+</body>
+</html>
