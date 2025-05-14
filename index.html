@@ -289,87 +289,36 @@ It’s pants.
 
   
 <!-- Drip Strip Gallery Link -->
-<div class="drip-strip-wrapper">
-  <a href="drip/" class="drip-strip-link" title="Enter the Hall of Drip">
-    <div class="drip-strip" id="dripStrip">
-      <img src="drip/drip-01.jpeg" alt="Drip 1" />
-      <img src="drip/drip-02.jpeg" alt="Drip 2" />
-      <img src="drip/drip-03.jpeg" alt="Drip 3" />
-    </div>
-  </a>
+<div class="drip-strip" onclick="location.href='/drip';" style="cursor: pointer; margin-top: 4rem; display: flex; justify-content: center; gap: 1rem; flex-wrap: nowrap; overflow-x: auto;">
+  <img id="drip1" src="drip/teddy-office.png" alt="Teddy Office" style="height: auto; max-height: 200px;">
+  <img id="drip2" src="drip/teddy-suit-city.png" alt="Teddy in City" style="height: auto; max-height: 200px;">
+  <img id="drip3" src="drip/pants-conspiracy-board.png" alt="Pants Conspiracy Board" style="height: auto; max-height: 200px;">
 </div>
-
-<style>
-  .drip-strip-wrapper {
-    margin-top: 4rem;
-    padding: 1rem 0;
-    background-color: #eae4d8;
-    border-top: 2px solid #ccc;
-    border-bottom: 2px solid #ccc;
-  }
-
-  .drip-strip-link {
-    text-decoration: none;
-    display: block;
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 0 1rem;
-  }
-
-  .drip-strip {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    flex-wrap: nowrap;
-    overflow: hidden;
-  }
-
-  .drip-strip img {
-    width: 30%;
-    max-width: 200px;
-    height: auto;
-    border-radius: 6px;
-    border: 2px solid #ccc;
-    transition: transform 0.2s ease;
-  }
-
-  .drip-strip img:hover {
-    transform: scale(1.05);
-    border-color: #222;
-  }
-
-  @media (max-width: 600px) {
-    .drip-strip {
-      gap: 0.5rem;
-    }
-
-    .drip-strip img {
-      width: 30%;
-      max-width: none;
-    }
-  }
-</style>
 
 <script>
   const dripImages = [
-    "drip/drip-01.jpeg", "drip/drip-02.jpeg", "drip/drip-03.jpeg",
-    "drip/drip-04.jpeg", "drip/drip-05.jpeg", "drip/drip-06.jpeg",
-    "drip/drip-07.jpeg", "drip/drip-08.png"
+    "drip/teddy-office.png",
+    "drip/teddy-suit-city.png",
+    "drip/pants-conspiracy-board.png",
+    "drip/teddy-pasa-floating.png",
+    "drip/teddy-cereal-box.png",
+    "drip/pants-cult-meeting.png"
   ];
 
-  function getRandomImages(arr, count) {
-    const shuffled = arr.slice().sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, count);
+  function shuffleDripStrip() {
+    const chosen = [];
+    while (chosen.length < 3) {
+      const pick = dripImages[Math.floor(Math.random() * dripImages.length)];
+      if (!chosen.includes(pick)) chosen.push(pick);
+    }
+    document.getElementById('drip1').src = chosen[0];
+    document.getElementById('drip2').src = chosen[1];
+    document.getElementById('drip3').src = chosen[2];
   }
 
-  function updateDripStrip() {
-    const strip = document.getElementById("dripStrip");
-    const imgs = getRandomImages(dripImages, 3);
-    strip.innerHTML = imgs.map(src => `<img src="${src}" alt="Drip Image" />`).join("");
-  }
-
-  setInterval(updateDripStrip, 2000); // change every 2 seconds
+  setInterval(shuffleDripStrip, 2000);
 </script>
+
 
 </body>
 </html>
