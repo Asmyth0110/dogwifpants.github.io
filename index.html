@@ -282,7 +282,7 @@
   color: #fdf6d3;
   border-color: #c9b458;
 }
-.dropdown-nav {
+.dropdown-nav-wrapper {
   position: fixed;
   top: 1rem;
   right: 1rem;
@@ -290,7 +290,7 @@
   font-family: 'Courier New', Courier, monospace;
 }
 
-.nav-button {
+.dropdown-nav-wrapper .nav-button {
   background-color: #fffaf0;
   border: 1px solid #ccc;
   color: #2a2a2a;
@@ -299,12 +299,17 @@
   cursor: pointer;
   font-weight: bold;
   transition: 0.2s ease-in-out;
+  width: 100%;
 }
 
-.nav-button:hover {
+.dropdown-nav-wrapper .nav-button:hover {
   background-color: #222;
   color: #f7f4e9;
   border-color: #444;
+}
+
+.dropdown-nav-wrapper:hover .dropdown-content {
+  display: block;
 }
 
 .dropdown-content {
@@ -317,7 +322,6 @@
   border-radius: 4px;
   min-width: 180px;
   box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
-  z-index: 999;
 }
 
 .dropdown-content a {
@@ -333,11 +337,6 @@
   color: #f7f4e9;
 }
 
-.dropdown-nav:hover .dropdown-content {
-  display: block;
-}
-
-
   </style>
 </head>
 <body>
@@ -346,7 +345,7 @@
 
   <h1>Dog Wif Pants</h1>
   
-<div class="dropdown-nav">
+<div class="dropdown-nav-wrapper">
   <button class="nav-button">Take me to ▾</button>
   <div class="dropdown-content">
     <a href="index.html">🏠 Home</a>
@@ -357,6 +356,7 @@
     <a href="dao.html">🧢 Pants DAO</a>
   </div>
 </div>
+
 
 
   <div class="lore">
