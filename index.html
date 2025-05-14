@@ -282,6 +282,30 @@
   color: #fdf6d3;
   border-color: #c9b458;
 }
+.dropdown-nav {
+  margin: 2rem auto;
+  font-size: 1rem;
+  font-family: 'Courier New', Courier, monospace;
+  color: #222;
+}
+
+.dropdown-nav select {
+  padding: 0.5rem 1rem;
+  font-family: inherit;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #fffaf0;
+}
+
+@media (max-width: 600px) {
+  .dropdown-nav {
+    width: 90%;
+  }
+  .dropdown-nav select {
+    width: 100%;
+  }
+}
 
 
   </style>
@@ -291,6 +315,19 @@
   <img src="original.jpg" alt="Dog Wif Pants Meme" class="main-image" />
 
   <h1>Dog Wif Pants</h1>
+  
+  <div class="dropdown-nav">
+  <label for="page-nav">Take Me To:</label>
+  <select id="page-nav" onchange="navigateToPage(this)">
+    <option value="">-- choose a destination --</option>
+    <option value="index.html">🏠 Homepage</option>
+    <option value="lore/">📖 The Sacred Stroll</option>
+    <option value="wisdom/">🧠 Teddy’s Teachings</option>
+    <option value="drip/">✨ Hall of Drip</option>
+    <option value="swap/">🌀 Pants Swap</option>
+    <option value="dao.html">🧢 Pants DAO</option>
+  </select>
+</div>
 
   <div class="lore">
     <p class="section-heading">The Origins: A Real Meme, A Real Movement</p>
@@ -378,6 +415,13 @@ It’s pants.
     <a href="dao.html">🧢 Enter the Pants DAO</a>
     <a href="#" target="_blank">📖 More Lore Coming Soon</a>
   </div>
+
+  <script>
+  function navigateToPage(select) {
+    const value = select.value;
+    if (value) window.location.href = value;
+  }
+  </script>
 
 </body>
 </html>
