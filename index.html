@@ -205,6 +205,26 @@
   color: #000;
 }
 }
+  .drip-button {
+    display: inline-block;
+    margin: 0.5rem 1rem;
+    text-decoration: none;
+    color: #fffaf0;
+    border: 2px solid #222;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    background-color: #222;
+    font-family: 'Courier New', Courier, monospace;
+    transition: all 0.25s ease-in-out;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .drip-button:hover {
+    background-color: #f7f4e9;
+    color: #222;
+    border-color: #000;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.35);
+  }
 
   </style>
 </head>
@@ -280,45 +300,12 @@ It’s pants.
   <div class="links">
     <a href="https://twitter.com/dogwifpants_OG" target="_blank">𝕏 Official</a>
     <a href="https://t.me/dogwifpantssol" target="_blank">💬 Telegram</a>
-    <a href="https://dexscreener.com/solana/dfoj2pvwmhxpr9bdavufu1xlzudeb2vr8pvu4uqnnfwm" target="_blank">📈 Chart</a>
+    <a href="drip/index.html" class="drip-button">✨ Enter the Hall of Drip</a>
     <a href="lore/" target="_blank">📖 Read the Sacred Stroll</a>
     <a href="swap/">🌀 Pants Swap Portal</a>
     <a href="dao.html">🧢 Enter the Pants DAO</a>
     <a href="#" target="_blank">📖 More Lore Coming Soon</a>
   </div>
-
-  
-<!-- Drip Strip Gallery Link -->
-<div class="drip-strip" onclick="location.href='/drip';" style="cursor: pointer; margin-top: 4rem; display: flex; justify-content: center; gap: 1rem; flex-wrap: nowrap; overflow-x: auto;">
-  <img id="drip1" src="drip/teddy-office.png" alt="Teddy Office" style="height: auto; max-height: 200px;">
-  <img id="drip2" src="drip/teddy-suit-city.png" alt="Teddy in City" style="height: auto; max-height: 200px;">
-  <img id="drip3" src="drip/pants-conspiracy-board.png" alt="Pants Conspiracy Board" style="height: auto; max-height: 200px;">
-</div>
-
-<script>
-  const dripImages = [
-    "drip/teddy-office.png",
-    "drip/teddy-suit-city.png",
-    "drip/pants-conspiracy-board.png",
-    "drip/teddy-pasa-floating.png",
-    "drip/teddy-cereal-box.png",
-    "drip/pants-cult-meeting.png"
-  ];
-
-  function shuffleDripStrip() {
-    const chosen = [];
-    while (chosen.length < 3) {
-      const pick = dripImages[Math.floor(Math.random() * dripImages.length)];
-      if (!chosen.includes(pick)) chosen.push(pick);
-    }
-    document.getElementById('drip1').src = chosen[0];
-    document.getElementById('drip2').src = chosen[1];
-    document.getElementById('drip3').src = chosen[2];
-  }
-
-  setInterval(shuffleDripStrip, 2000);
-</script>
-
 
 </body>
 </html>
