@@ -69,11 +69,73 @@
       background-color: #222;
       color: #f7f4e9;
     }
+    .dropdown-nav-wrapper {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1000;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.nav-button {
+  background-color: #fffaf0;
+  border: 1px solid #ccc;
+  color: #2a2a2a;
+  padding: 0.75rem 1.25rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s ease-in-out;
+}
+
+.nav-button:hover {
+  background-color: #222;
+  color: #f7f4e9;
+  border-color: #444;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 3.2rem;
+  right: 0;
+  background-color: #fffaf0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  min-width: 180px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+}
+
+.dropdown-content a {
+  color: #2a2a2a;
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+  display: block;
+  border-bottom: 1px solid #eee;
+}
+
+.dropdown-content a:hover {
+  background-color: #222;
+  color: #f7f4e9;
+}
+
   </style>
 </head>
 <body>
 
   <h1>The Sacred Stroll</h1>
+  <div class="dropdown-nav-wrapper">
+  <button class="nav-button" onclick="toggleDropdown()">Take me to ▾</button>
+  <div class="dropdown-content" id="dropdownMenu">
+    <a href="../index.html">🏠 Home</a>
+    <a href="../swap/">🌀 Pants Swap</a>
+    <a href="../drip/index.html">✨ Hall of Drip</a>
+    <a href="../lore/">📖 Sacred Stroll</a>
+    <a href="../wisdom/">🧠 Teddy's Teachings</a>
+    <a href="../dao.html">🧢 Pants DAO</a>
+  </div>
+</div>
+
   <h3>Lore of Dogwifpants ($PANTS)</h3>
   <h5>Written by <a href="https://x.com/Erwinium1" target="_blank">@Erwinium1</a></h5>
   <div class="section">
@@ -160,6 +222,20 @@
   </div>
 
   <a class="back-link" href="../index.html">← Return to Homepage</a>
+ <script>
+  function toggleDropdown() {
+    const menu = document.getElementById("dropdownMenu");
+    menu.style.display = (menu.style.display === "block") ? "none" : "block";
+  }
+
+  document.addEventListener("click", function(e) {
+    const menu = document.getElementById("dropdownMenu");
+    const button = document.querySelector(".nav-button");
+    if (!button.contains(e.target) && !menu.contains(e.target)) {
+      menu.style.display = "none";
+    }
+  });
+</script>
 
 </body>
 </html>
