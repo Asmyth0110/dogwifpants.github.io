@@ -102,18 +102,19 @@
   color: #f7f4e9;
 }
 body {
-  background-image: url("The_Hall_of_Drip.jpg");
+  background-image: url("The_Hall_of_Drip.png");
   background-repeat: repeat;
   background-size: 600px auto;
   background-position: center top;
-  background-attachment: fixed;
+  background-attachment: scroll; /* safer for mobile */
 }
-    @media (max-width: 768px) {
+@media (max-width: 768px) {
   body {
     background-size: 400px auto;
+    background-attachment: scroll;
+    background-position: center top;
   }
 }
-
 
 
 
