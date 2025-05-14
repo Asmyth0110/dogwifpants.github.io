@@ -283,28 +283,58 @@
   border-color: #c9b458;
 }
 .dropdown-nav {
-  margin: 2rem auto;
-  font-size: 1rem;
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1000;
   font-family: 'Courier New', Courier, monospace;
-  color: #222;
 }
 
-.dropdown-nav select {
-  padding: 0.5rem 1rem;
-  font-family: inherit;
-  font-size: 1rem;
-  border-radius: 6px;
-  border: 1px solid #ccc;
+.nav-button {
   background-color: #fffaf0;
+  border: 1px solid #ccc;
+  color: #2a2a2a;
+  padding: 0.75rem 1.25rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s ease-in-out;
 }
 
-@media (max-width: 600px) {
-  .dropdown-nav {
-    width: 90%;
-  }
-  .dropdown-nav select {
-    width: 100%;
-  }
+.nav-button:hover {
+  background-color: #222;
+  color: #f7f4e9;
+  border-color: #444;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 3.2rem;
+  right: 0;
+  background-color: #fffaf0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  min-width: 180px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+  z-index: 999;
+}
+
+.dropdown-content a {
+  color: #2a2a2a;
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+  display: block;
+  border-bottom: 1px solid #eee;
+}
+
+.dropdown-content a:hover {
+  background-color: #222;
+  color: #f7f4e9;
+}
+
+.dropdown-nav:hover .dropdown-content {
+  display: block;
 }
 
 
@@ -316,18 +346,18 @@
 
   <h1>Dog Wif Pants</h1>
   
-  <div class="dropdown-nav">
-  <label for="page-nav">Take Me To:</label>
-  <select id="page-nav" onchange="navigateToPage(this)">
-    <option value="">-- choose a destination --</option>
-    <option value="index.html">🏠 Homepage</option>
-    <option value="lore/">📖 The Sacred Stroll</option>
-    <option value="wisdom/">🧠 Teddy’s Teachings</option>
-    <option value="drip/">✨ Hall of Drip</option>
-    <option value="swap/">🌀 Pants Swap</option>
-    <option value="dao.html">🧢 Pants DAO</option>
-  </select>
+<div class="dropdown-nav">
+  <button class="nav-button">Take me to ▾</button>
+  <div class="dropdown-content">
+    <a href="index.html">🏠 Home</a>
+    <a href="swap/">🌀 Pants Swap</a>
+    <a href="drip/index.html">✨ Hall of Drip</a>
+    <a href="lore/">📖 Sacred Stroll</a>
+    <a href="wisdom/">🧠 Teddy's Teachings</a>
+    <a href="dao.html">🧢 Pants DAO</a>
+  </div>
 </div>
+
 
   <div class="lore">
     <p class="section-heading">The Origins: A Real Meme, A Real Movement</p>
