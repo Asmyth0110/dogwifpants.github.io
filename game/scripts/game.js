@@ -79,3 +79,10 @@ function fireBullet(scene, time) {
     }
   }
 }
+
+function create() {
+  this.add.image(480, 270, 'bg1');
+  player = this.physics.add.sprite(100, 400, 'player');
+}
+
+function update() {}
