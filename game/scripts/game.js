@@ -2,10 +2,11 @@ const config = {
   type: Phaser.AUTO,
   width: 960,
   height: 540,
+  parent: null,
   backgroundColor: '#000000',
   scale: {
     mode: Phaser.Scale.FIT,
-    autoCenter: Phaser.Scale.CENTER_BOTH
+    autoCenter: Phaser.Scale.CENTER_BOTH,
   },
   physics: {
     default: 'arcade',
@@ -24,47 +25,43 @@ const config = {
 
 const game = new Phaser.Game(config);
 
-let player, cursors, bullets, lastFired = 0;
-let bg1, bg2, bg3;
+let player, cursors;
 
 function preload() {
   this.load.image('bg1', 'assets/parallax_layer1.png');
   this.load.image('bg2', 'assets/parallax_layer2.png');
   this.load.image('bg3', 'assets/parallax_layer3.png');
   this.load.image('player', 'assets/teddy.png');
-  this.load.image('bullet', 'assets/bullet.png');
 }
 
 function create() {
-  // Add backgrounds
+  // Background layers
   this.bg1 = this.add.tileSprite(0, 0, 960, 540, 'bg1').setOrigin(0);
   this.bg2 = this.add.tileSprite(0, 0, 960, 540, 'bg2').setOrigin(0);
   this.bg3 = this.add.tileSprite(0, 0, 960, 540, 'bg3').setOrigin(0);
 
-  // Create a ground platform
+  // Ground using one of the background layers temporarily
   const ground = this.physics.add.staticGroup();
-  ground.create(480, 500, 'bg1').setScale(2).refreshBody(); // Acts as ground
+  ground.create(480, 520, 'bg1').setScale(2).refreshBody();
 
-  // Add player (Teddy)
+  // Teddy character
   player = this.physics.add.sprite(100, 400, 'player');
   player.setCollideWorldBounds(true);
 
-  // Add collision between Teddy and ground
+  // Collide player with ground
   this.physics.add.collider(player, ground);
 
   // Controls
   cursors = this.input.keyboard.createCursorKeys();
 }
 
-
 function update() {
   if (cursors.up.isDown && player.body.touching.down) {
     player.setVelocityY(-500);
   }
 
-  // Optional parallax scroll
+  // Scroll background
   this.bg1.tilePositionX += 0.5;
   this.bg2.tilePositionX += 1;
   this.bg3.tilePositionX += 2;
 }
-
