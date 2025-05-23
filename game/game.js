@@ -22,7 +22,7 @@ const game = new Phaser.Game(config);
 let player;
 
 function preload() {
-  this.load.image('bg', 'assets/background.png'); // Replace with actual background
+  this.load.image('bg', 'assets/parallax_background.png');
   this.load.image('player', 'assets/teddy.png');  // Placeholder for Teddy
 }
 
