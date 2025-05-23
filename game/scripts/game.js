@@ -28,11 +28,11 @@ const game = new Phaser.Game(config);
 let player, cursors, bullets, lastFired = 0;
 
 function preload() {
-  this.load.image('bg1', 'assets/parallax_layer1.png');
-  this.load.image('bg2', 'assets/parallax_layer2.png');
-  this.load.image('bg3', 'assets/parallax_layer3.png');
-  this.load.image('player', 'assets/teddy.png');
-  this.load.image('bullet', 'assets/bullet.png');
+  this.load.image('bg1', '/assets/parallax_layer1.png');
+  this.load.image('bg2', '/assets/parallax_layer2.png');
+  this.load.image('bg3', '/assets/parallax_layer3.png');
+  this.load.image('player', '/assets/teddy.png');
+  this.load.image('bullet', '/assets/bullet.png');
 }
 
 
