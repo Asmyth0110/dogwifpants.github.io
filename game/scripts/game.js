@@ -36,22 +36,35 @@ function preload() {
 }
 
 function create() {
-  bg1 = this.add.tileSprite(0, 0, 960, 540, 'bg1').setOrigin(0);
-  bg2 = this.add.tileSprite(0, 0, 960, 540, 'bg2').setOrigin(0);
-  bg3 = this.add.tileSprite(0, 0, 960, 540, 'bg3').setOrigin(0);
+  // Add backgrounds
+  this.bg1 = this.add.tileSprite(0, 0, 960, 540, 'bg1').setOrigin(0);
+  this.bg2 = this.add.tileSprite(0, 0, 960, 540, 'bg2').setOrigin(0);
+  this.bg3 = this.add.tileSprite(0, 0, 960, 540, 'bg3').setOrigin(0);
 
+  // Create a ground platform
+  const ground = this.physics.add.staticGroup();
+  ground.create(480, 500, 'bg1').setScale(2).refreshBody(); // Acts as ground
+
+  // Add player (Teddy)
   player = this.physics.add.sprite(100, 400, 'player');
+  player.setCollideWorldBounds(true);
+
+  // Add collision between Teddy and ground
+  this.physics.add.collider(player, ground);
+
+  // Controls
   cursors = this.input.keyboard.createCursorKeys();
 }
 
-function update() {
-  // Parallax scrolling
-  bg1.tilePositionX += 0.2;
-  bg2.tilePositionX += 0.5;
-  bg3.tilePositionX += 1;
 
-  // Basic jump
+function update() {
   if (cursors.up.isDown && player.body.touching.down) {
     player.setVelocityY(-500);
   }
+
+  // Optional parallax scroll
+  this.bg1.tilePositionX += 0.5;
+  this.bg2.tilePositionX += 1;
+  this.bg3.tilePositionX += 2;
 }
+
