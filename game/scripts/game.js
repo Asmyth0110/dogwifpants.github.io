@@ -80,6 +80,8 @@ function fireBullet(scene, time) {
   }
 }
 
+this.bg1 = this.add.image(480, 270, 'bg1');
+
 
 
 
