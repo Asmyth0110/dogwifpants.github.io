@@ -28,13 +28,18 @@ const game = new Phaser.Game(config);
 let player, cursors, bullets, lastFired = 0;
 
 function preload() {
-  this.load.image('background', 'assets/background.png');
+  this.load.image('bg1', 'assets/parallax_layer1.png'); // Farthest
+  this.load.image('bg2', 'assets/parallax_layer2.png'); // Mid
+  this.load.image('bg3', 'assets/parallax_layer3.png'); // Foreground
   this.load.image('player', 'assets/teddy.png');
   this.load.image('bullet', 'assets/bullet.png');
 }
 
+
 function create() {
-  this.add.image(480, 270, 'background');
+  this.bg1 = this.add.tileSprite(0, 0, 960, 540, 'bg1').setOrigin(0).setScrollFactor(0);
+  this.bg2 = this.add.tileSprite(0, 0, 960, 540, 'bg2').setOrigin(0).setScrollFactor(0);
+  this.bg3 = this.add.tileSprite(0, 0, 960, 540, 'bg3').setOrigin(0).setScrollFactor(0);
 
   player = this.physics.add.sprite(100, 400, 'player');
   player.setCollideWorldBounds(true);
@@ -48,8 +53,13 @@ function create() {
   this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
 }
 
+
 function update(time) {
-  player.setVelocityX(160); // Always running
+  this.bg1.tilePositionX += 0.3;
+  this.bg2.tilePositionX += 1;
+  this.bg3.tilePositionX += 2;
+
+  player.setVelocityX(160);
 
   if (cursors.up.isDown && player.body.touching.down) {
     player.setVelocityY(-400);
@@ -59,6 +69,7 @@ function update(time) {
     fireBullet(this, time);
   }
 }
+
 
 function fireBullet(scene, time) {
   if (time > lastFired) {
