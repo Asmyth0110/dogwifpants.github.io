@@ -2,7 +2,6 @@ const config = {
   type: Phaser.AUTO,
   width: 960,
   height: 540,
-  parent: null,
   backgroundColor: '#000000',
   scale: {
     mode: Phaser.Scale.FIT,
@@ -26,6 +25,7 @@ const config = {
 const game = new Phaser.Game(config);
 
 let player, cursors, bullets, lastFired = 0;
+let bg1, bg2, bg3;
 
 function preload() {
   this.load.image('bg1', 'assets/parallax_layer1.png');
@@ -35,46 +35,23 @@ function preload() {
   this.load.image('bullet', 'assets/bullet.png');
 }
 
-
-
 function create() {
-  this.add.image(480, 270, 'bg1');
+  bg1 = this.add.tileSprite(0, 0, 960, 540, 'bg1').setOrigin(0);
+  bg2 = this.add.tileSprite(0, 0, 960, 540, 'bg2').setOrigin(0);
+  bg3 = this.add.tileSprite(0, 0, 960, 540, 'bg3').setOrigin(0);
+
   player = this.physics.add.sprite(100, 400, 'player');
+  cursors = this.input.keyboard.createCursorKeys();
 }
 
+function update() {
+  // Parallax scrolling
+  bg1.tilePositionX += 0.2;
+  bg2.tilePositionX += 0.5;
+  bg3.tilePositionX += 1;
 
-
-
-function update(time) {
-  this.bg1.tilePositionX += 0.3;
-  this.bg2.tilePositionX += 1;
-  this.bg3.tilePositionX += 2;
-
-  player.setVelocityX(160);
-
+  // Basic jump
   if (cursors.up.isDown && player.body.touching.down) {
-    player.setVelocityY(-400);
-  }
-
-  if (this.input.keyboard.checkDown(this.input.keyboard.addKey('Z'), 250)) {
-    fireBullet(this, time);
+    player.setVelocityY(-500);
   }
 }
-
-
-function fireBullet(scene, time) {
-  if (time > lastFired) {
-    const bullet = bullets.get(player.x + 20, player.y);
-    if (bullet) {
-      bullet.setActive(true).setVisible(true);
-      bullet.body.velocity.x = 400;
-      lastFired = time + 300;
-    }
-  }
-}
-
-this.bg1 = this.add.image(480, 270, 'bg1');
-
-
-
-
