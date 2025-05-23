@@ -38,17 +38,10 @@ function preload() {
 
 
 function create() {
-  this.bg1 = this.add.tileSprite(0, 0, 960, 540, 'bg1').setOrigin(0);
-  this.bg2 = this.add.tileSprite(0, 0, 960, 540, 'bg2').setOrigin(0);
-  this.bg3 = this.add.tileSprite(0, 0, 960, 540, 'bg3').setOrigin(0);
-
+  this.add.image(480, 270, 'bg1');
   player = this.physics.add.sprite(100, 400, 'player');
-  player.setCollideWorldBounds(true);
-
-  bullets = this.physics.add.group({ defaultKey: 'bullet', maxSize: 10 });
-
-  cursors = this.input.keyboard.createCursorKeys();
 }
+
 
 
 
