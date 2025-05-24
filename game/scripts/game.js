@@ -32,6 +32,8 @@ function preload() {
   this.load.image('bg2', 'assets/parallax_layer2.png');
   this.load.image('bg3', 'assets/parallax_layer3.png');
   this.load.image('player', 'assets/teddy.png');
+  this.load.image('ground', 'assets/ground.png');
+
 }
 
 function create() {
@@ -45,9 +47,9 @@ function create() {
   player.setCollideWorldBounds(true);
 
   // Invisible ground
-  const ground = this.physics.add.staticGroup();
-  ground.create(480, 520, null).setSize(960, 40).setVisible(false);
-  this.physics.add.collider(player, ground);
+ const ground = this.physics.add.staticImage(480, 520, 'ground');
+this.physics.add.collider(player, ground);
+
 
   // Controls
   cursors = this.input.keyboard.createCursorKeys();
