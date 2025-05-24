@@ -48,6 +48,8 @@ function create() {
 
   // Ground
   const ground = this.physics.add.staticImage(480, 520, 'ground');
+ground.setScale(4, 1).refreshBody(); // Stretch it horizontally
+
   this.physics.add.collider(player, ground);
 
   // Bullets group
