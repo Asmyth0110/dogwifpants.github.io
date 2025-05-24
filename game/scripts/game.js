@@ -24,7 +24,7 @@ const config = {
 
 const game = new Phaser.Game(config);
 
-let player, cursors;
+let player, cursors, bullets, lastFired = 0;
 let bg1, bg2, bg3;
 
 function preload() {
@@ -33,7 +33,7 @@ function preload() {
   this.load.image('bg3', 'assets/parallax_layer3.png');
   this.load.image('player', 'assets/teddy.png');
   this.load.image('ground', 'assets/ground.png');
-
+  this.load.image('bullet', 'assets/bullet.png'); // ← Make sure this file exists
 }
 
 function create() {
@@ -46,21 +46,48 @@ function create() {
   player = this.physics.add.sprite(100, 400, 'player');
   player.setCollideWorldBounds(true);
 
-  // Invisible ground
- const ground = this.physics.add.staticImage(480, 520, 'ground');
-this.physics.add.collider(player, ground);
+  // Ground
+  const ground = this.physics.add.staticImage(480, 520, 'ground');
+  this.physics.add.collider(player, ground);
 
+  // Bullets group
+  bullets = this.physics.add.group({
+    defaultKey: 'bullet',
+    maxSize: 10
+  });
 
   // Controls
   cursors = this.input.keyboard.createCursorKeys();
 }
 
-function update() {
+function update(time, delta) {
   bg1.tilePositionX += 0.2;
   bg2.tilePositionX += 0.5;
   bg3.tilePositionX += 1;
 
+  // Jump
   if (cursors.up.isDown && player.body.touching.down) {
     player.setVelocityY(-500);
   }
+
+  // Shoot (spacebar)
+  if (cursors.space.isDown && time > lastFired) {
+    const bullet = bullets.get(player.x + 20, player.y);
+
+    if (bullet) {
+      bullet.setActive(true);
+      bullet.setVisible(true);
+      bullet.body.enable = true;
+      bullet.setVelocityX(600);
+      lastFired = time + 250; // 250ms cooldown
+    }
+  }
+
+  // Cleanup off-screen bullets
+  bullets.children.each(function(bullet) {
+    if (bullet.active && bullet.x > 1000) {
+      bullets.killAndHide(bullet);
+      bullet.body.enable = false;
+    }
+  }, this);
 }
