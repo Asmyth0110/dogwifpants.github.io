@@ -32,9 +32,9 @@ function preload() {
   this.load.image('bg1', 'assets/parallax_layer1.png');
   this.load.image('bg2', 'assets/parallax_layer2.png');
   this.load.image('bg3', 'assets/parallax_layer3.png');
-  this.load.image('player', 'assets/teddy.png');
+  this.load.image('player', 'assets/teddy (1).png');
   this.load.image('ground', 'assets/ground.png');
-  this.load.image('bullet', 'assets/bullet.png');
+  this.load.image('bullet', 'assets/bullet (1).png');
   this.load.image('enemy', 'assets/enemy.png');
   this.load.image('jumpButton', 'assets/jump_button.png');
   this.load.image('blasterButton', 'assets/blaster_button.png');
