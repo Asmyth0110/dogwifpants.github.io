@@ -63,16 +63,20 @@ function create() {
   // On-screen mobile controls
   jumpButton = this.add.image(100, 450, 'jumpButton').setInteractive();
   jumpButton.setScrollFactor(0).setDepth(1);
+  jumpButton.setScale(0.4); 
   jumpButton.on('pointerdown', () => {
     if (player.body.touching.down) player.setVelocityY(-500);
   });
 
   fireButton = this.add.image(480, 450, 'blasterButton').setInteractive();
-  fireButton.setScrollFactor(0).setDepth(1);
-  fireButton.on('pointerdown', () => fireBullet(this));
+fireButton.setScrollFactor(0).setDepth(1);
+fireButton.setScale(0.4); // Resize to better fit screen
+fireButton.on('pointerdown', () => fireBullet(this));
+
 
   swapButton = this.add.image(860, 450, 'swapButton').setInteractive();
   swapButton.setScrollFactor(0).setDepth(1);
+  swapButton.setScale(0.4); 
   swapButton.on('pointerdown', () => {
     console.log("Swap activated");
   });
