@@ -32,9 +32,9 @@ function preload() {
   this.load.image('bg1', 'assets/parallax_layer1.png');
   this.load.image('bg2', 'assets/parallax_layer2.png');
   this.load.image('bg3', 'assets/parallax_layer3.png');
-  this.load.image('player', 'assets/teddy (1).png');
+  this.load.image('player', 'assets/teddy (1).png'); // ✅ fixed filename
   this.load.image('ground', 'assets/ground.png');
-  this.load.image('bullet', 'assets/bullet (1).png');
+  this.load.image('bullet', 'assets/bullet (1).png'); // ✅ fixed filename
   this.load.image('enemy', 'assets/enemy.png');
   this.load.image('jumpButton', 'assets/jump_button.png');
   this.load.image('blasterButton', 'assets/blaster_button.png');
@@ -47,6 +47,7 @@ function create() {
   bg3 = this.add.tileSprite(0, 0, 960, 540, 'bg3').setOrigin(0);
 
   player = this.physics.add.sprite(100, 400, 'player');
+  player.setScale(0.4); // ✅ resize Teddy
   player.setCollideWorldBounds(true);
 
   const ground = this.physics.add.staticImage(480, 500, 'ground');
@@ -61,22 +62,18 @@ function create() {
   cursors = this.input.keyboard.createCursorKeys();
 
   // On-screen mobile controls
-  jumpButton = this.add.image(100, 450, 'jumpButton').setInteractive();
-  jumpButton.setScrollFactor(0).setDepth(1);
-  jumpButton.setScale(0.4); 
+  jumpButton = this.add.image(100, 510, 'jumpButton').setInteractive();
+  jumpButton.setScrollFactor(0).setDepth(1).setScale(0.4);
   jumpButton.on('pointerdown', () => {
     if (player.body.touching.down) player.setVelocityY(-500);
   });
 
-  fireButton = this.add.image(480, 450, 'blasterButton').setInteractive();
-fireButton.setScrollFactor(0).setDepth(1);
-fireButton.setScale(0.4); // Resize to better fit screen
-fireButton.on('pointerdown', () => fireBullet(this));
+  fireButton = this.add.image(480, 510, 'blasterButton').setInteractive();
+  fireButton.setScrollFactor(0).setDepth(1).setScale(0.4);
+  fireButton.on('pointerdown', () => fireBullet(this));
 
-
-  swapButton = this.add.image(860, 450, 'swapButton').setInteractive();
-  swapButton.setScrollFactor(0).setDepth(1);
-  swapButton.setScale(0.4); 
+  swapButton = this.add.image(860, 510, 'swapButton').setInteractive();
+  swapButton.setScrollFactor(0).setDepth(1).setScale(0.4);
   swapButton.on('pointerdown', () => {
     console.log("Swap activated");
   });
