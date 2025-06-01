@@ -47,7 +47,7 @@ function create() {
   bg3 = this.add.tileSprite(0, 0, 960, 540, 'bg3').setOrigin(0);
 
   player = this.physics.add.sprite(100, 320, 'player');
-  player.setScale(0.28); // scaled down from 0.5
+  player.setScale(0.28);
   player.setCollideWorldBounds(true);
 
   const ground = this.physics.add.staticImage(480, 525, 'ground');
@@ -61,19 +61,19 @@ function create() {
 
   cursors = this.input.keyboard.createCursorKeys();
 
-  // On-screen mobile controls
-  jumpButton = this.add.image(100, 510, 'jumpButton').setInteractive();
-  jumpButton.setScrollFactor(0).setDepth(1).setScale(0.32);
+  // On-screen mobile controls (repositioned and resized)
+  jumpButton = this.add.image(120, 470, 'jumpButton').setInteractive();
+  jumpButton.setScrollFactor(0).setDepth(1).setScale(0.24);
   jumpButton.on('pointerdown', () => {
     if (player.body.touching.down) player.setVelocityY(-500);
   });
 
-  fireButton = this.add.image(480, 510, 'blasterButton').setInteractive();
-  fireButton.setScrollFactor(0).setDepth(1).setScale(0.32);
+  fireButton = this.add.image(480, 470, 'blasterButton').setInteractive();
+  fireButton.setScrollFactor(0).setDepth(1).setScale(0.24);
   fireButton.on('pointerdown', () => fireBullet(this));
 
-  swapButton = this.add.image(860, 510, 'swapButton').setInteractive();
-  swapButton.setScrollFactor(0).setDepth(1).setScale(0.32);
+  swapButton = this.add.image(840, 470, 'swapButton').setInteractive();
+  swapButton.setScrollFactor(0).setDepth(1).setScale(0.24);
   swapButton.on('pointerdown', () => {
     console.log("Swap activated");
   });
