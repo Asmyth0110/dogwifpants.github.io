@@ -30,11 +30,11 @@ let bg1, bg2, bg3, jumpButton, fireButton, swapButton;
 let laserCharge = 100, laserCooldown = false;
 let platforms, enemies;
 
-function preload() {
-  this.load.spritesheet('player', 'assets/teddy_run.png', {
-    frameWidth: 64,
-    frameHeight: 64
-  });
+this.load.spritesheet('player', 'assets/teddy_run_sprite_sheet.png', {
+  frameWidth: 64, // or the exact width of one frame
+  frameHeight: 64
+});
+
   this.load.image('bg1', 'assets/city_far.png');
   this.load.image('bg2', 'assets/city_mid.png');
   this.load.image('bg3', 'assets/city_near.png');
