@@ -30,11 +30,11 @@ let bg1, bg2, bg3, jumpButton, fireButton, swapButton;
 let laserCharge = 100, laserCooldown = false;
 let platforms, enemies;
 
-this.load.spritesheet('player', 'assets/teddy_run_sprite_sheet.png', {
-  frameWidth: 64, // or the exact width of one frame
-  frameHeight: 64
-});
-
+function preload() {
+  this.load.spritesheet('player', 'assets/teddy_run_sprite_sheet.png', {
+    frameWidth: 170,
+    frameHeight: 1024
+  });
   this.load.image('bg1', 'assets/city_far.png');
   this.load.image('bg2', 'assets/city_mid.png');
   this.load.image('bg3', 'assets/city_near.png');
@@ -51,9 +51,10 @@ function create() {
   bg2 = this.add.tileSprite(0, 0, 960, 540, 'bg2').setOrigin(0);
   bg3 = this.add.tileSprite(0, 0, 960, 540, 'bg3').setOrigin(0);
 
-  player = this.physics.add.sprite(100, 320, 'player');
-  player.setScale(0.28);
+  player = this.physics.add.sprite(100, 300, 'player');
+  player.setScale(0.15); // Scaled down for better screen fit
   player.setCollideWorldBounds(true);
+
   this.anims.create({
     key: 'run',
     frames: this.anims.generateFrameNumbers('player', { start: 0, end: 5 }),
@@ -75,11 +76,7 @@ function create() {
   });
   this.physics.add.collider(player, platforms);
 
-  bullets = this.physics.add.group({
-    defaultKey: 'bullet',
-    maxSize: 10
-  });
-
+  bullets = this.physics.add.group({ defaultKey: 'bullet', maxSize: 10 });
   cursors = this.input.keyboard.createCursorKeys();
 
   jumpButton = this.add.image(120, 470, 'jumpButton').setInteractive().setScale(0.24);
