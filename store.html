@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>$PANTS Merch Store</title>
+  <style>
+    body {
+      background-color: #f7f4e9;
+      font-family: 'Courier New', Courier, monospace;
+      color: #222;
+      text-align: center;
+      padding: 2rem;
+      line-height: 1.6;
+    }
+    .store-container {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .product-image {
+      width: 300px;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+    }
+    .price, .selector, .payment {
+      margin-top: 1rem;
+    }
+    select, input, button {
+      padding: 0.6rem;
+      font-family: inherit;
+      font-size: 1rem;
+      margin-top: 0.5rem;
+    }
+    button {
+      cursor: pointer;
+      border: none;
+      border-radius: 6px;
+      margin: 0.5rem;
+    }
+    .pay-button {
+      background-color: #00ffae;
+      color: #000;
+    }
+    .wallet-section {
+      margin-top: 2rem;
+    }
+    .dropdown-nav-wrapper {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 1000;
+    }
+    .nav-button {
+      background-color: #fffaf0;
+      border: 1px solid #ccc;
+      color: #2a2a2a;
+      padding: 0.75rem 1.25rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 3.2rem;
+      right: 0;
+      background-color: #fffaf0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      min-width: 180px;
+    }
+    .dropdown-content a {
+      color: #2a2a2a;
+      padding: 0.75rem 1rem;
+      text-decoration: none;
+      display: block;
+      border-bottom: 1px solid #eee;
+    }
+    .dropdown-content a:hover {
+      background-color: #222;
+      color: #f7f4e9;
+    }
+  </style>
+</head>
+<body>
+  <div class="dropdown-nav-wrapper">
+    <button class="nav-button" onclick="toggleDropdown()">Take me to ▾</button>
+    <div class="dropdown-content" id="dropdownMenu">
+      <a href="index.html">🏠 Home</a>
+      <a href="swap/">🔀 Pants Swap</a>
+      <a href="drip/index.html">✨ Hall of Drip</a>
+      <a href="lore/">📖 Sacred Stroll</a>
+      <a href="wisdom/">🧠 Teddy's Teachings</a>
+      <a href="dao.html">🧢 Pants DAO</a>
+    </div>
+  </div>
+
+  <div class="store-container">
+    <h1>OG Teddy Tee</h1>
+    <img src="original.jpg" alt="Teddy Shirt" class="product-image">
+    <p>$35 USD equivalent</p>
+
+    <div class="selector">
+      <label for="size">Select Size:</label>
+      <select id="size">
+        <option value="S">S</option>
+        <option value="M">M</option>
+        <option value="L">L</option>
+        <option value="XL">XL</option>
+      </select>
+    </div>
+
+    <div class="payment">
+      <p>Choose your crypto:</p>
+      <button class="pay-button" onclick="payWithToken('SOL')">Pay w/ SOL</button>
+      <button class="pay-button" onclick="payWithToken('USDC')">Pay w/ USDC</button>
+      <button class="pay-button" onclick="payWithToken('PANTS')">Pay w/ $PANTS</button>
+    </div>
+
+    <div class="wallet-section">
+      <p><strong>NOTE:</strong> Shipping info will be collected after payment.</p>
+    </div>
+  </div>
+
+  <script>
+    function toggleDropdown() {
+      const menu = document.getElementById("dropdownMenu");
+      menu.style.display = (menu.style.display === "block") ? "none" : "block";
+    }
+
+    document.addEventListener("click", function(e) {
+      const menu = document.getElementById("dropdownMenu");
+      const button = document.querySelector(".nav-button");
+      if (!button.contains(e.target) && !menu.contains(e.target)) {
+        menu.style.display = "none";
+      }
+    });
+
+    function payWithToken(token) {
+      const recipient = "YOUR_WALLET_ADDRESS_HERE"; // <-- Replace this
+      const pantsMint = "BG6VWes7KRFNPXHbWbA95ZU7grnaob8JSsS7r181pump";
+      const amountUSD = 35; // fixed price
+      let mint;
+
+      if (token === "SOL") mint = "So11111111111111111111111111111111111111112";
+      else if (token === "USDC") mint = "Es9vMFrzaCERqFegU2h8FQk1NHX3VJUZ4zjvqG41wVLy";
+      else if (token === "PANTS") mint = pantsMint;
+
+      // Construct Solana Pay URL (simplified for static demo)
+      const url = `solana:${recipient}?amount=${amountUSD}&spl-token=${mint}`;
+      window.open(url, '_blank');
+    }
+  </script>
+</body>
+</html>
