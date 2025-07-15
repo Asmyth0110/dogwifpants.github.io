@@ -22,7 +22,7 @@
       border-radius: 6px;
       margin-bottom: 1rem;
     }
-    .price, .selector, .payment {
+    .price, .selector, .payment, .form-group {
       margin-top: 1rem;
     }
     select, input, button {
@@ -110,15 +110,33 @@
       </select>
     </div>
 
-    <div class="payment">
-      <p>Choose your crypto:</p>
-      <button class="pay-button" onclick="payWithToken('SOL')">Pay w/ SOL</button>
-      <button class="pay-button" onclick="payWithToken('USDC')">Pay w/ USDC</button>
-      <button class="pay-button" onclick="payWithToken('PANTS')">Pay w/ $PANTS</button>
-    </div>
+    <form id="orderForm">
+      <div class="form-group">
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" required />
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" required />
+      </div>
+      <div class="form-group">
+        <label for="address">Shipping Address:</label>
+        <input type="text" id="address" required />
+      </div>
+      <div class="form-group">
+        <label for="country">Country:</label>
+        <input type="text" id="country" required />
+      </div>
+      <div class="payment">
+        <p>Choose your crypto:</p>
+        <button type="button" class="pay-button" onclick="payWithToken('SOL')">Pay w/ SOL</button>
+        <button type="button" class="pay-button" onclick="payWithToken('USDC')">Pay w/ USDC</button>
+        <button type="button" class="pay-button" onclick="payWithToken('PANTS')">Pay w/ $PANTS</button>
+      </div>
+    </form>
 
     <div class="wallet-section">
-      <p><strong>NOTE:</strong> Shipping info will be collected after payment.</p>
+      <p><strong>NOTE:</strong> Shipping info will be processed after payment confirmation.</p>
     </div>
   </div>
 
@@ -139,15 +157,34 @@
     function payWithToken(token) {
       const recipient = "YOUR_WALLET_ADDRESS_HERE"; // <-- Replace this
       const pantsMint = "BG6VWes7KRFNPXHbWbA95ZU7grnaob8JSsS7r181pump";
-      const amountUSD = 35; // fixed price
+      const amountUSD = 35;
       let mint;
 
       if (token === "SOL") mint = "So11111111111111111111111111111111111111112";
       else if (token === "USDC") mint = "Es9vMFrzaCERqFegU2h8FQk1NHX3VJUZ4zjvqG41wVLy";
       else if (token === "PANTS") mint = pantsMint;
 
-      // Construct Solana Pay URL (simplified for static demo)
-      const url = `solana:${recipient}?amount=${amountUSD}&spl-token=${mint}`;
+      const reference = crypto.randomUUID();
+      const url = `solana:${recipient}?amount=${amountUSD}&spl-token=${mint}&reference=${reference}`;
+
+      // Store reference and send form data to backend
+      const form = document.getElementById("orderForm");
+      const orderData = {
+        name: form.name.value,
+        email: form.email.value,
+        address: form.address.value,
+        country: form.country.value,
+        size: form.size.value,
+        token,
+        reference
+      };
+
+      fetch("/.netlify/functions/verifyAndOrder", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(orderData)
+      });
+
       window.open(url, '_blank');
     }
   </script>
