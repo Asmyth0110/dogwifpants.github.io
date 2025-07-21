@@ -144,8 +144,12 @@
       </div>
     </form>
 <div id="confirmationMessage" style="display:none; margin-top:1rem; font-weight:bold; color:green;">Thank you! Your order has been submitted.</div>
-
-    <div class="wallet-section">
+<div class="wallet-section">
+  <label for="txHash">Enter transaction signature to confirm:</label><br />
+  <input type="text" id="txHash" placeholder="Paste your tx signature" style="width: 60%; padding: 0.5rem; margin: 1rem 0;">
+  <br />
+  <button onclick="confirmOrder()" class="pay-button">Confirm Payment</button>
+</div>
       <p><strong>NOTE:</strong> Shipping info will be processed after payment confirmation.</p>
     </div>
   </div>
@@ -179,7 +183,7 @@
       else if (token === "PANTS") mint = pantsMint;
 
       const reference = crypto.randomUUID();
-      const url = `solana:${recipient}?amount=${amountUSD}&spl-token=${mint}&reference=${reference}`;
+      const url = `solana:${recipient}?amount=${amountUSD}&spl-token=${mint}&reference=${reference}&label=Dog%20Wif%20Pants&message=OG%20Teddy%20Tee%20Purchase&memo=pantsstore-${reference}`;
 
       const form = document.getElementById("orderForm");
       const orderData = {
@@ -193,11 +197,7 @@
         reference
       };
 
-      fetch("https://formspree.io/f/xpwlqvdr", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(orderData)
-      });
+      // fetch skipped here, waiting for payment confirmation
 
       // Show QR code
       const qrContainer = document.createElement('div');
@@ -211,7 +211,13 @@
 
       // Also provide Phantom universal link
       const phantomUrl = `https://phantom.app/ul/v1/pay?recipient=${recipient}&amount=${amountUSD}&spl-token=${mint}&reference=${reference}`;
-      window.open(phantomUrl, '_blank');
+      if (/Mobi|Android/i.test(navigator.userAgent)) {
+        // Mobile: open Phantom universal link
+        window.open(phantomUrl, '_blank');
+      } else {
+        // Desktop: Show message or skip Phantom deep link
+        console.log("Phantom universal link skipped on desktop");
+      }
     }
     document.getElementById("color").addEventListener("change", function() {
     const color = this.value;
@@ -222,6 +228,37 @@
       preview.src = "https://files.cdn.printful.com/files/e72/e72c3e63c8db59f420fbdee839729478_preview.png";
     }
   });
+function confirmOrder() {
+  const form = document.getElementById("orderForm");
+  const txHash = document.getElementById("txHash").value.trim();
+  if (!txHash) {
+    alert("Please enter your transaction signature");
+    return;
+  }
+
+  const orderData = {
+    name: form.name.value,
+    email: form.email.value,
+    address: form.address.value,
+    country: form.country.value,
+    size: document.getElementById("size").value,
+    color: document.getElementById("color").value,
+    txHash
+  };
+
+  fetch("https://formspree.io/f/xpwlqvdr", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(orderData)
+  }).then(response => {
+    if (response.ok) {
+      document.getElementById("confirmationMessage").style.display = "block";
+      form.reset();
+    } else {
+      alert("Error confirming order. Try again or contact support.");
+    }
+  });
+}
 </script>
 <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
 </body>
