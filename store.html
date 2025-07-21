@@ -183,69 +183,7 @@
       const reference = crypto.randomUUID();
       const url = `solana:${recipient}?amount=${amountUSD}&spl-token=${mint}&reference=${reference}&label=Dog%20Wif%20Pants&message=OG%20Teddy%20Tee%20Purchase&memo=pantsstore-${reference}`;
 
-      const form = document.getElementById("orderForm");
-      const orderData = {
-        name: form.name.value,
-        email: form.email.value,
-        address: form.address.value,
-        country: form.country.value,
-        size: document.getElementById("size").value,
-        color: document.getElementById("color").value,
-        token,
-        reference
-      };
-
-      // fetch skipped here, waiting for payment confirmation
-
-      // Show QR code
-      const qrWrapper = document.getElementById("qrWrapper");
-      qrWrapper.innerHTML = ""; // Clear previous QR if any
-      new QRCode(qrWrapper, {
-        text: url,
-        width: 180,
-        height: 180
-      });
-
-      // Also provide Phantom universal link
-      const phantomUrl = `https://phantom.app/ul/v1/pay?recipient=${recipient}&amount=${amountUSD}&spl-token=${mint}&reference=${reference}`;
-      if (/Mobi|Android/i.test(navigator.userAgent)) {
-        // Mobile: open Phantom universal link
-        window.open(phantomUrl, '_blank');
-      } else {
-        // Desktop: Show message or skip Phantom deep link
-        console.log("Phantom universal link skipped on desktop");
-      }
-    }
-    document.getElementById("color").addEventListener("change", function() {
-    const color = this.value;
-    const preview = document.getElementById("productPreview");
-    if (color === "Black") {
-      preview.src = "https://files.cdn.printful.com/files/71a/71a98dadfaabc562353a3c85e6dcf2d8_preview.png";
-    } else if (color === "Steel Blue") {
-      preview.src = "https://files.cdn.printful.com/files/e72/e72c3e63c8db59f420fbdee839729478_preview.png";
-    }
-  });
-
-  const orderData = {
-    name: form.name.value,
-    email: form.email.value,
-    address: form.address.value,
-    country: form.country.value,
-    size: document.getElementById("size").value,
-    color: document.getElementById("color").value,
-    txHash
-  };
-
-  fetch("https://formspree.io/f/xpwlqvdr", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(orderData)
-      }).then(response => {
-        if (response.ok) {
-          document.getElementById("confirmationMessage").style.display = "block";
-          form.reset();
-        }
-      });
+      
 }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
