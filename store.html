@@ -183,8 +183,32 @@
       const reference = crypto.randomUUID();
       const url = `solana:${recipient}?amount=${amountUSD}&spl-token=${mint}&reference=${reference}&label=Dog%20Wif%20Pants&message=OG%20Teddy%20Tee%20Purchase&memo=pantsstore-${reference}`;
 
+      // Generate QR code
+      const qrWrapper = document.getElementById("qrWrapper");
+      qrWrapper.innerHTML = "";
+      new QRCode(qrWrapper, {
+        text: url,
+        width: 180,
+        height: 180
+      });
+
+      // Open Phantom link on mobile only
+      const phantomUrl = `https://phantom.app/ul/v1/pay?recipient=${recipient}&amount=${amountUSD}&spl-token=${mint}&reference=${reference}`;
+      if (/Mobi|Android/i.test(navigator.userAgent)) {
+        window.open(phantomUrl, '_blank');
+      }
+
       
 }
+document.getElementById("color").addEventListener("change", function () {
+  const preview = document.getElementById("productPreview");
+  const color = this.value;
+  if (color === "Steel Blue") {
+    preview.src = "https://files.cdn.printful.com/files/d92/d92260dc3aa6f0c7903838b62570de6d_preview.png";
+  } else {
+    preview.src = "https://files.cdn.printful.com/files/71a/71a98dadfaabc562353a3c85e6dcf2d8_preview.png";
+  }
+});
 </script>
 <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
 </body>
