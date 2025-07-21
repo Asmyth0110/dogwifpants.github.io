@@ -12,16 +12,27 @@ exports.handler = async function(event, context) {
   const data = JSON.parse(event.body);
   const {
     name, email, address, country,
-    size, token, reference
+    size, color, token, reference
   } = data;
 
   // === CONFIG ===
-  const WALLET = 'YOUR_WALLET_ADDRESS_HERE';
+  const WALLET = 'AXLtJZAYju9E16nCuDhJzhwUCAhaoDUeEXzZBSafqqZk';
   const PANTS_MINT = 'BG6VWes7KRFNPXHbWbA95ZU7grnaob8JSsS7r181pump';
   const PRINTFUL_API_KEY = 'IUr0wprRrHiOxKs6GzTPPbhNaWdLdHDuxbvONVbY';
-  const VARIANT_ID = 'YOUR_PRINTFUL_VARIANT_ID'; // use Printful's size/color variant ID
-  const SENDGRID_API_KEY = 'YOUR_SENDGRID_API_KEY';
-  const FROM_EMAIL = 'noreply@yourdomain.com';
+  const VARIANT_IDS = {
+  'Black XS': '687e9efe348416',
+  'Black S': '687e9efe3484c3',
+  'Black M': '687e9efe348552',
+  'Black L': '687e9efe3485e1',
+  'Black XL': '687e9efe348669',
+  'Steel Blue XS': '687e9efe3486f7',
+  'Steel Blue S': '687e9efe348775',
+  'Steel Blue M': '687e9efe3487f9',
+  'Steel Blue L': '687e9efe348887',
+  'Steel Blue XL': '687e9efe348908'
+};
+  const SENDGRID_API_KEY = 'YOUR_SENDGRID_API_KEY'; // Replace with your actual key
+  const FROM_EMAIL = 'anthony.smythh@gmail.com';
 
   // === 1. VERIFY PAYMENT (Basic mock — integrate with Helius or JSON RPC for production) ===
   // Skip verification for now; assume success
@@ -42,7 +53,7 @@ exports.handler = async function(event, context) {
         },
         items: [
           {
-            variant_id: VARIANT_ID,
+            variant_id: VARIANT_IDS[`${color} ${size}`],
             quantity: 1,
             name: `OG Teddy Tee (${size})`
           }
