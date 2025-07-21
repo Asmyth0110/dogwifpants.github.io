@@ -97,12 +97,21 @@
 
   <div class="store-container">
     <h1>OG Teddy Tee</h1>
-    <img src="original.jpg" alt="Teddy Shirt" class="product-image">
+    <img id="productPreview" src="https://files.cdn.printful.com/mockup/black-shirt.jpg" alt="Teddy Shirt" class="product-image">
     <p>$35 USD equivalent</p>
+
+    <div class="selector">
+      <label for="color">Select Color:</label>
+      <select id="color">
+        <option value="Black">Black</option>
+        <option value="Steel Blue">Steel Blue</option>
+      </select>
+    </div>
 
     <div class="selector">
       <label for="size">Select Size:</label>
       <select id="size">
+        <option value="XS">XS</option>
         <option value="S">S</option>
         <option value="M">M</option>
         <option value="L">L</option>
@@ -155,7 +164,7 @@
     });
 
     function payWithToken(token) {
-      const recipient = "YOUR_WALLET_ADDRESS_HERE"; // <-- Replace this
+      const recipient = "AXLtJZAYju9E16nCuDhJzhwUCAhaoDUeEXzZBSafqqZk";
       const pantsMint = "BG6VWes7KRFNPXHbWbA95ZU7grnaob8JSsS7r181pump";
       const amountUSD = 35;
       let mint;
@@ -167,14 +176,14 @@
       const reference = crypto.randomUUID();
       const url = `solana:${recipient}?amount=${amountUSD}&spl-token=${mint}&reference=${reference}`;
 
-      // Store reference and send form data to backend
       const form = document.getElementById("orderForm");
       const orderData = {
         name: form.name.value,
         email: form.email.value,
         address: form.address.value,
         country: form.country.value,
-        size: form.size.value,
+        size: document.getElementById("size").value,
+        color: document.getElementById("color").value,
         token,
         reference
       };
@@ -187,6 +196,15 @@
 
       window.open(url, '_blank');
     }
-  </script>
+    document.getElementById("color").addEventListener("change", function() {
+    const color = this.value;
+    const preview = document.getElementById("productPreview");
+    if (color === "Black") {
+      preview.src = "https://files.cdn.printful.com/files/71a/71a98dadfaabc562353a3c85e6dcf2d8_preview.png";
+    } else if (color === "Steel Blue") {
+      preview.src = "https://files.cdn.printful.com/files/e72/e72c3e63c8db59f420fbdee839729478_preview.png";
+    }
+  });
+</script>
 </body>
 </html>
