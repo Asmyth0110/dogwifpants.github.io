@@ -98,7 +98,6 @@
   <div class="store-container">
     <h1>OG Teddy Tee</h1>
     <img id="productPreview" src="https://files.cdn.printful.com/files/71a/71a98dadfaabc562353a3c85e6dcf2d8_preview.png" alt="Teddy Shirt" class="product-image">
-
     <p>$35 USD equivalent</p>
 
     <div class="selector">
@@ -144,6 +143,7 @@
         <button type="button" class="pay-button" onclick="payWithToken('PANTS')">Pay w/ $PANTS</button>
       </div>
     </form>
+<div id="confirmationMessage" style="display:none; margin-top:1rem; font-weight:bold; color:green;">Thank you! Your order has been submitted.</div>
 
     <div class="wallet-section">
       <p><strong>NOTE:</strong> Shipping info will be processed after payment confirmation.</p>
@@ -189,10 +189,15 @@
         reference
       };
 
-      fetch("https://formspree.io/f/your_form_id", {
+      fetch("https://formspree.io/f/xpwlqvdr", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(orderData)
+      }).then(response => {
+        if (response.ok) {
+          document.getElementById("confirmationMessage").style.display = "block";
+          form.reset();
+        }
       });
 
       window.open(url, '_blank');
