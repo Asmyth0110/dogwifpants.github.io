@@ -165,6 +165,10 @@
     });
 
     function payWithToken(token) {
+      const form = document.getElementById("orderForm");
+      if (!form.reportValidity()) {
+        return; // Don't continue unless form is valid
+      }
       const recipient = "AXLtJZAYju9E16nCuDhJzhwUCAhaoDUeEXzZBSafqqZk";
       const pantsMint = "BG6VWes7KRFNPXHbWbA95ZU7grnaob8JSsS7r181pump";
       const amountUSD = 35;
@@ -193,11 +197,6 @@
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(orderData)
-      }).then(response => {
-        if (response.ok) {
-          document.getElementById("confirmationMessage").style.display = "block";
-          form.reset();
-        }
       });
 
       // Show QR code
