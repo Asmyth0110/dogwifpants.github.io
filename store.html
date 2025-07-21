@@ -98,11 +98,7 @@
   <div class="store-container">
     <h1>OG Teddy Tee</h1>
     <img id="productPreview" src="https://files.cdn.printful.com/files/71a/71a98dadfaabc562353a3c85e6dcf2d8_preview.png" alt="Teddy Shirt" class="product-image">
-    <p>$30 USD equivalent</p>
-    <p style="max-width: 600px; margin: 1rem auto;">
-This isn’t just a tee — it’s meme history. Featuring the original OG Teddy on the chest and “dog wif pants” embroidered in golden yellow on the left sleeve, this shirt is a tribute to the one who walked before the others could run. Premium cotton, legendary energy.
-</p>
-
+    <p>$35 USD equivalent</p>
 
     <div class="selector">
       <label for="color">Select Color:</label>
@@ -204,7 +200,19 @@ This isn’t just a tee — it’s meme history. Featuring the original OG Teddy
         }
       });
 
-      window.open(url, '_blank');
+      // Show QR code
+      const qrContainer = document.createElement('div');
+      qrContainer.style.marginTop = '1rem';
+      const qr = new QRCode(qrContainer, {
+        text: url,
+        width: 180,
+        height: 180
+      });
+      document.querySelector(".wallet-section").appendChild(qrContainer);
+
+      // Also provide Phantom universal link
+      const phantomUrl = `https://phantom.app/ul/v1/pay?recipient=${recipient}&amount=${amountUSD}&spl-token=${mint}&reference=${reference}`;
+      window.open(phantomUrl, '_blank');
     }
     document.getElementById("color").addEventListener("change", function() {
     const color = this.value;
@@ -216,5 +224,6 @@ This isn’t just a tee — it’s meme history. Featuring the original OG Teddy
     }
   });
 </script>
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
 </body>
 </html>
