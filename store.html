@@ -194,9 +194,36 @@
 
       // Open Phantom link on mobile only
       const phantomUrl = `https://phantom.app/ul/v1/pay?recipient=${recipient}&amount=${amountUSD}&spl-token=${mint}&reference=${reference}`;
-      if (/Mobi|Android/i.test(navigator.userAgent)) {
-        window.open(phantomUrl, '_blank');
-      }
+   if (/Mobi|Android/i.test(navigator.userAgent)) {
+  window.open(phantomSend, '_blank');
+}
+
+const orderData = {
+  name: form.name.value,
+  email: form.email.value,
+  address: form.address.value,
+  country: form.country.value,
+  size: document.getElementById("size").value,
+  color: document.getElementById("color").value,
+  token,
+  reference
+};
+
+fetch("/.netlify/functions/verifyAndOrderWithHelius", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(orderData)
+})
+.then(res => res.json())
+.then(data => {
+  if (data.success) {
+    document.getElementById("confirmationMessage").style.display = "block";
+    form.reset();
+  } else {
+    alert("Payment not found yet. Please try again after confirming in your wallet.");
+  }
+})
+.catch(err => alert("Error processing order: " + err.message));
 
       
 }
