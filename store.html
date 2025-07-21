@@ -145,10 +145,8 @@
     </form>
 <div id="confirmationMessage" style="display:none; margin-top:1rem; font-weight:bold; color:green;">Thank you! Your order has been submitted.</div>
 <div class="wallet-section">
-  <label for="txHash">Enter transaction signature to confirm:</label><br />
-  <input type="text" id="txHash" placeholder="Paste your tx signature" style="width: 60%; padding: 0.5rem; margin: 1rem 0;">
-  <br />
-  <button onclick="confirmOrder()" class="pay-button">Confirm Payment</button>
+  <p><strong>NOTE:</strong> Scan the QR code below or use Phantom Wallet to complete your payment.</p>
+  <div id="qrWrapper" style="margin-top: 1rem;"></div>
 </div>
       <p><strong>NOTE:</strong> Shipping info will be processed after payment confirmation.</p>
     </div>
@@ -200,14 +198,13 @@
       // fetch skipped here, waiting for payment confirmation
 
       // Show QR code
-      const qrContainer = document.createElement('div');
-      qrContainer.style.marginTop = '1rem';
-      const qr = new QRCode(qrContainer, {
+      const qrWrapper = document.getElementById("qrWrapper");
+      qrWrapper.innerHTML = ""; // Clear previous QR if any
+      new QRCode(qrWrapper, {
         text: url,
         width: 180,
         height: 180
       });
-      document.querySelector(".wallet-section").appendChild(qrContainer);
 
       // Also provide Phantom universal link
       const phantomUrl = `https://phantom.app/ul/v1/pay?recipient=${recipient}&amount=${amountUSD}&spl-token=${mint}&reference=${reference}`;
@@ -228,13 +225,6 @@
       preview.src = "https://files.cdn.printful.com/files/e72/e72c3e63c8db59f420fbdee839729478_preview.png";
     }
   });
-function confirmOrder() {
-  const form = document.getElementById("orderForm");
-  const txHash = document.getElementById("txHash").value.trim();
-  if (!txHash) {
-    alert("Please enter your transaction signature");
-    return;
-  }
 
   const orderData = {
     name: form.name.value,
@@ -247,17 +237,15 @@ function confirmOrder() {
   };
 
   fetch("https://formspree.io/f/xpwlqvdr", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(orderData)
-  }).then(response => {
-    if (response.ok) {
-      document.getElementById("confirmationMessage").style.display = "block";
-      form.reset();
-    } else {
-      alert("Error confirming order. Try again or contact support.");
-    }
-  });
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(orderData)
+      }).then(response => {
+        if (response.ok) {
+          document.getElementById("confirmationMessage").style.display = "block";
+          form.reset();
+        }
+      });
 }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
