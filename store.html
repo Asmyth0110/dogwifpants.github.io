@@ -185,6 +185,7 @@
 
       const reference = crypto.randomUUID();
       const url = `solana:${recipient}?amount=${amountUSD}&spl-token=${mint}&reference=${reference}&label=Dog%20Wif%20Pants&message=OG%20Teddy%20Tee%20Purchase&memo=pantsstore-${reference}`;
+      const phantomSend = `https://app.phantom.app/send?recipient=${recipient}&amount=${amountUSD}&token=${mint}`;
 
       // Generate QR code
       const qrWrapper = document.getElementById("qrWrapper");
