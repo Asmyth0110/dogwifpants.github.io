@@ -1,6 +1,12 @@
-export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method Not Allowed" });
+  // ✅ FIXED VERSION
+const fetch = require('node-fetch');
+
+exports.handler = async function(event, context) {
+  if (event.httpMethod !== "POST") {
+    return {
+      statusCode: 405,
+      body: JSON.stringify({ error: "Method Not Allowed" })
+    };
   }
 
   try {
