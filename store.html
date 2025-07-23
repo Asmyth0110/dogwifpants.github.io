@@ -1,3 +1,4 @@
+<!-- Will paste full updated HTML with wallet detection, UI state control, and improved payment feedback -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -144,6 +145,8 @@
       </div>
     </form>
 <div id="confirmationMessage" style="display:none; margin-top:1rem; font-weight:bold; color:green;">Thank you! Your order has been submitted.</div>
+<div id="loadingMessage" style="display:none; margin-top:1rem; font-weight:bold; color:#555;">⏳ Waiting for payment confirmation...</div>
+<div id="errorMessage" style="display:none; margin-top:1rem; font-weight:bold; color:red;"></div>
 <div class="wallet-section">
   <p><strong>NOTE:</strong> Scan the QR code below or use Phantom Wallet to complete your payment.</p>
   <div id="qrWrapper" style="margin-top: 1rem;"></div>
@@ -209,21 +212,30 @@ const orderData = {
   reference
 };
 
-fetch("/.netlify/functions/verifyAndOrderWithHelius", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify(orderData)
-})
-.then(res => res.json())
-.then(data => {
-  if (data.success) {
-    document.getElementById("confirmationMessage").style.display = "block";
-    form.reset();
-  } else {
-    alert("Payment not found yet. Please try again after confirming in your wallet.");
-  }
-})
-.catch(err => alert("Error processing order: " + err.message));
+document.getElementById("loadingMessage").style.display = "block";
+  document.getElementById("errorMessage").style.display = "none";
+
+  fetch("/.netlify/functions/verifyAndOrderWithHelius", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(orderData)
+  })
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById("loadingMessage").style.display = "none";
+    if (data.success) {
+      document.getElementById("confirmationMessage").style.display = "block";
+      form.reset();
+    } else {
+      document.getElementById("errorMessage").textContent = "Payment not found yet. Please try again after confirming in your wallet.";
+      document.getElementById("errorMessage").style.display = "block";
+    }
+  })
+  .catch(err => {
+    document.getElementById("loadingMessage").style.display = "none";
+    document.getElementById("errorMessage").textContent = "Error processing order: " + err.message;
+    document.getElementById("errorMessage").style.display = "block";
+  });
 
       
 }
@@ -237,6 +249,39 @@ document.getElementById("color").addEventListener("change", function () {
   }
 });
 </script>
+
+<script>
+  // Phantom Wallet Detection + UI Logic
+  const isPhantomInstalled = window?.solana?.isPhantom;
+  const payButtons = document.querySelectorAll(".pay-button");
+
+  if (!isPhantomInstalled) {
+    payButtons.forEach(btn => {
+      btn.disabled = true;
+      btn.textContent = "Phantom Required";
+      btn.style.backgroundColor = "#ccc";
+      btn.style.cursor = "not-allowed";
+    });
+    const notice = document.createElement("p");
+    notice.style.color = "red";
+    notice.textContent = "Phantom wallet not detected. Please install Phantom to continue.";
+    document.querySelector(".wallet-section").appendChild(notice);
+  }
+
+  document.getElementById("orderForm").addEventListener("input", function () {
+    const isValid = this.reportValidity();
+    if (isPhantomInstalled && isValid) {
+      payButtons.forEach(btn => {
+        btn.disabled = false;
+        btn.textContent = btn.getAttribute("data-original") || btn.textContent;
+        btn.style.backgroundColor = "#00ffae";
+        btn.style.cursor = "pointer";
+      });
+    }
+  });
+</script>
+
+  
 <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
 </body>
 </html>
