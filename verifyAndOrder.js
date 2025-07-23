@@ -44,15 +44,17 @@ exports.handler = async function (event, context) {
     };
   }
 
-  // === 1. Check Helius for matching payment ===
+  // === 1. Check Helius for matching payment with retries ===
   const heliusUrl = `https://api.helius.xyz/v0/addresses/${WALLET}/transactions?api-key=${HELIUS_API_KEY}&limit=20`;
   try {
-    const txRes = await fetch(heliusUrl);
-    const txJson = await txRes.json();
-
-    const match = txJson.find((tx) => {
-      return tx.memo && tx.memo.includes(reference);
-    });
+    let match = null;
+    for (let attempt = 0; attempt < 5; attempt++) {
+      const txRes = await fetch(heliusUrl);
+      const txJson = await txRes.json();
+      match = txJson.find((tx) => tx.memo && tx.memo.includes(reference));
+      if (match) break;
+      await new Promise(res => setTimeout(res, 1500)); // wait 1.5s before retry
+    }
 
     if (!match) {
       return {
