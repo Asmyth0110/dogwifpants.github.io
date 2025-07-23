@@ -1,4 +1,6 @@
 // Netlify Function: verifyAndOrder.js
+// Enhanced with Helius retry logic and Printful integration
+// Frontend should include Phantom wallet detection and feedback UI
 // Location: /netlify/functions/verifyAndOrder.js
 
 const fetch = require("node-fetch");
