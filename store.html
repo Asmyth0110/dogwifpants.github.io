@@ -216,7 +216,7 @@ const orderData = {
 document.getElementById("loadingMessage").style.display = "block";
   document.getElementById("errorMessage").style.display = "none";
 
-  fetch("/.netlify/functions/verifyAndOrderWithHelius", {
+  fetch("/.netlify/functions/verifyandorderwithhelius", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(orderData)
